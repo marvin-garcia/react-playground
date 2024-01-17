@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using GasPriceCalculator.Server.Models;
+using FuelPriceOptimizer.Server.Models;
 using Microsoft.Extensions.Options;
 
-namespace GasPriceCalculator.Server.Controllers
+namespace FuelPriceOptimizer.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GasPriceCalculator.Server.Models
+namespace FuelPriceOptimizer.Server.Models
 {
     public class WholesaleSummary
     {

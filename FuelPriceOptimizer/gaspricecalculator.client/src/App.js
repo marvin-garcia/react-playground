@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import VerticalNavbar from './components/VerticalNavbar';
-import HorizontalNavbar from './components/HorizontalNavbar';
 import StationGrid from './components/StationGrid';
 import ReportFileGrid from './components/ReportFileGrid';
 import Header from './components/Header';
@@ -96,7 +94,7 @@ const App = () => {
   //     </div>
   //   </div>
   // );
-  
+
   return (
     <div>
       <Header />

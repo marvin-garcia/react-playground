@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Header = () => {
+    // Manage toggle states
     const [notificationState, setNotificationState] = useState('');
     const [messageState, setMessageState] = useState('');
     const [profileState, setProfileState] = useState('');
 
-    const onHeaderToggle = (item) => {
-        console.log('item:', item);
-        switch (item) {
-            case 'notification':
-                setNotificationState((prevState) => (prevState === '' ? 'show' : ''));
-                setMessageState('');
-                setProfileState('');
-                break;
-            case 'message':
-                setMessageState((prevState) => (prevState === '' ? 'show' : ''));
-                setNotificationState('');
-                setProfileState('');
-                break;
-            case 'profile':
-                setProfileState((prevState) => (prevState === '' ? 'show' : ''));
-                setNotificationState('');
-                setMessageState('');
-                break;
-            default:
-                break;
-        }
-    };
+    // const onHeaderToggle = (item) => {
+    //     switch (item) {
+    //         case 'notification':
+    //             setNotificationState((prevState) => (prevState === '' ? 'show' : ''));
+    //             setMessageState('');
+    //             setProfileState('');
+    //             break;
+    //         case 'message':
+    //             setMessageState((prevState) => (prevState === '' ? 'show' : ''));
+    //             setNotificationState('');
+    //             setProfileState('');
+    //             break;
+    //         case 'profile':
+    //             setProfileState((prevState) => (prevState === '' ? 'show' : ''));
+    //             setNotificationState('');
+    //             setMessageState('');
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // };
 
     const Notifications = (props) => {
         const notifications = [
@@ -53,14 +53,14 @@ const Header = () => {
         ];
 
         return (
+            <div>
             <li class="nav-item dropdown">
                 <a 
                     href="#"
-                    class={`nav-link nav-icon ${notificationState}`} 
+                    class={`nav-link nav-icon notifications-container ${notificationState}`}
                     data-bs-toggle="dropdown" 
                     aria-expanded={`${notificationState === 'show' ? 'true' : 'false'}`}
-                    // onClick={props.onClick}
-                    onClick={() => props.onClick('notification')}
+                    // onClick={() => props.onClick('notification')}
                 >
                 <i class="bi bi-bell"></i>
                 <span class="badge bg-primary badge-number">{notifications.length}</span>
@@ -96,6 +96,7 @@ const Header = () => {
                 ))}
                 </ul>
             </li>
+            </div>
         );
     };
 
@@ -125,10 +126,10 @@ const Header = () => {
             <li class="nav-item dropdown">
                 <a 
                     href="#"
-                    class={`nav-link nav-icon ${messageState}`}
+                    class={`nav-link nav-icon messages-container ${messageState}`}
                     data-bs-toggle="dropdown"
                     aria-expanded={`${messageState === 'show' ? 'true' : 'false'}`}
-                    onClick={() => props.onClick('message')}
+                    // onClick={() => props.onClick('message')}
                 >
                 <i class="bi bi-chat-left-text"></i>
                 <span class="badge bg-success badge-number">3</span>
@@ -180,10 +181,10 @@ const Header = () => {
             <li class="nav-item dropdown pe-3">
                 <a 
                     href="#"
-                    class={`nav-link nav-profile d-flex align-items-center pe-0 ${profileState}`}
+                    class={`nav-link nav-profile d-flex align-items-center pe-0 profile-container ${profileState}`}
                     data-bs-toggle="dropdown"
                     aria-expanded={`${profileState === 'show' ? 'true' : 'false'}`}
-                    onClick={() => props.onClick('profile')}
+                    // onClick={() => props.onClick('profile')}
                 >
                 <img src={profileData.image} alt="Profile" class="rounded-circle" />
                 <span class="d-none d-md-block dropdown-toggle ps-2">{profileData.name}</span>
@@ -204,8 +205,8 @@ const Header = () => {
                 </li>
                 <li>
                     <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                    <i class="bi bi-person"></i>
-                    <span>My Profile</span>
+                        <i class="bi bi-person"></i>
+                        <span>My Profile</span>
                     </a>
                 </li>
                 <li>
@@ -240,12 +241,61 @@ const Header = () => {
         );
     };
 
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            var clickedOn;
+            if (event.target.closest('.notifications-container')) {
+                clickedOn = 'notification';
+            }
+            else if (event.target.closest('.messages-container')) {
+                clickedOn = 'message';
+            }
+            else if (event.target.closest('.profile-container')) {
+                clickedOn = 'profile';
+            };
+
+            switch (clickedOn) {
+                case 'notification':
+                    setNotificationState((prevState) => (prevState === '' ? 'show' : ''));
+                    setMessageState('');
+                    setProfileState('');
+                    break;
+
+                case 'message':
+                    setMessageState((prevState) => (prevState === '' ? 'show' : ''));
+                    setNotificationState('');
+                    setProfileState('');
+                    break;
+
+                case 'profile':
+                    setProfileState((prevState) => (prevState === '' ? 'show' : ''));
+                    setNotificationState('');
+                    setMessageState('');
+                    break;
+
+                default:
+                    setNotificationState('');
+                    setMessageState('');
+                    setProfileState('');
+                    break;
+            };
+        };
+
+        // Attach the click event listener to the document
+        document.addEventListener('click', handleOutsideClick);
+        
+        // Cleanup the event listener on unmount
+        return () => {
+            document.removeEventListener('click', handleOutsideClick);
+        };
+    }, [notificationState, messageState, profileState]);
+
     return (
         <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="" />
-            <span class="d-none d-lg-block">GasPriceEstimator</span>
+            <span class="d-none d-lg-block">FuelPriceOptimizer</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
@@ -262,9 +312,9 @@ const Header = () => {
                         <i class="bi bi-search"></i>
                     </a>
                 </li>
-                <Notifications onClick={onHeaderToggle} />
-                <Messages onClick={onHeaderToggle} /> 
-                <Profile onClick={onHeaderToggle} />
+                <Notifications />
+                <Messages />
+                <Profile />
             </ul>
         </nav>
         </header>

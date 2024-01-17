@@ -1,4 +1,4 @@
-using GasPriceCalculator.Server.Models;
+using FuelPriceOptimizer.Server.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -2,7 +2,7 @@
 using Azure.Storage.Sas;
 using Azure.Storage.Blobs;
 
-namespace GasPriceCalculator.Server.Models
+namespace FuelPriceOptimizer.Server.Models
 {
     public class File
     {
