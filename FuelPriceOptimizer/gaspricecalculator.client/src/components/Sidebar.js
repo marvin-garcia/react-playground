@@ -1,8 +1,63 @@
 import React, { useState } from 'react';
 
 const Sidebar = () => {
+  const [sidebarState, setSidebarState] = useState('');
+
+  const onSidebarChange = (item) => {
+    console.log('sidebar change:', item);
+    switch (item) {
+      case 'stations':
+        setSidebarState((prevState) => (prevState === 'stations' ? '' : 'stations'));
+        console.log('stations sidebar item state:', sidebarState);
+        break;
+      default:
+        setSidebarState('');
+    }
+  }
+
+  const Stations = (props) => {
+    const itemList = [
+      {
+        name: 'List',
+        href: 'components-alerts.html'
+      }
+    ];
+
+    const collapsed = sidebarState === 'stations' ? false : true;
+
     return (
-        <aside id="sidebar" class="sidebar">
+      <li class="nav-item">
+        <a
+          href="#"
+          class={`nav-link ${collapsed ? 'collapsed' : ''}`}
+          data-bs-target="#stations-nav"
+          data-bs-toggle="collapse"
+          aria-expanded={!collapsed}
+          onClick={() => props.onClick('stations')}
+        >
+          <i class="bi bi-menu-button-wide"></i>
+          <span>Stations</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul 
+          id="stations-nav"
+          class={`nav-content colapse ${collapsed ? 'show' : ''}`}
+          data-bs-parent="#sidebar-nav"
+        >
+          {itemList.map((_item) => {
+            <li key={itemList.indexOf(_item)}>
+              <a key={itemList.indexOf(_item)} href={_item.href}>
+                <i class="bi bi-circle"></i><span>{_item.name}</span>
+              </a>
+            </li>
+          })}
+        </ul>
+      </li>
+    );
+  };
+
+  return (
+    <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
           <a class="nav-link " href="index.html">
@@ -10,18 +65,7 @@ const Sidebar = () => {
             <span>Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Stations</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="components-alerts.html">
-                <i class="bi bi-circle"></i><span>List</span>
-              </a>
-            </li>
-          </ul>
-        </li>
+        <Stations onClick={onSidebarChange} />
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -57,7 +101,7 @@ const Sidebar = () => {
           </ul>
         </li>
       </ul>
-      </aside>
-    );
+    </aside>
+  );
 };
 export default Sidebar;
