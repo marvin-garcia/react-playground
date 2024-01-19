@@ -1,0 +1,110 @@
+[
+  {
+    "avgTransferPrice": 2.2435404639,
+    "avgDtwPrice": 3.2122783571,
+    "date": "2023-12-16T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.4968335629,
+    "avgDtwPrice": 3.539435107,
+    "date": "2023-12-17T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.7878702838,
+    "avgDtwPrice": 3.3122688018,
+    "date": "2023-12-18T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.5858270612,
+    "avgDtwPrice": 3.5554871749,
+    "date": "2023-12-19T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.5019182158,
+    "avgDtwPrice": 3.5841218743,
+    "date": "2023-12-20T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.7579233998,
+    "avgDtwPrice": 3.2399650236,
+    "date": "2023-12-21T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.3107609204,
+    "avgDtwPrice": 3.3814455988,
+    "date": "2023-12-22T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.09436351,
+    "avgDtwPrice": 3.3373787008,
+    "date": "2023-12-23T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.4971777275,
+    "avgDtwPrice": 3.6619846442,
+    "date": "2023-12-24T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.2256194535,
+    "avgDtwPrice": 3.302214589,
+    "date": "2023-12-25T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.8411380864,
+    "avgDtwPrice": 3.4154781366,
+    "date": "2023-12-26T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.4859024285,
+    "avgDtwPrice": 3.7847751393,
+    "date": "2023-12-27T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.0398468148,
+    "avgDtwPrice": 3.0562179415,
+    "date": "2023-12-28T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.5787530097,
+    "avgDtwPrice": 3.5546554746,
+    "date": "2023-12-29T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.6749898866,
+    "avgDtwPrice": 3.2182234619,
+    "date": "2023-12-30T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.2193415438,
+    "avgDtwPrice": 3.7574437754,
+    "date": "2023-12-31T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.6466774259,
+    "avgDtwPrice": 3.2528270681,
+    "date": "2024-01-01T00:00:00.000",
+    "zone": "14C"
+  },
+  {
+    "avgTransferPrice": 2.5737244709,
+    "avgDtwPrice": 3.7449366266,
+    "date": "2024-01-02T00:00:00.000",
+    "zone": "14C"
+  }
+]

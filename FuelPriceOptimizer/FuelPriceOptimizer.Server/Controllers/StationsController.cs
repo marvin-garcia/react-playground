@@ -7,51 +7,30 @@ namespace FuelPriceOptimizer.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StationsController : Controller
+    public class StationsController(IConfiguration configuration, ILogger<StationsController> logger, IStationService stationService) : Controller
     {
-        private readonly ILogger _logger;
-        private readonly IConfiguration _configuration;
-        private readonly IZoneService _zoneService;
-
-        public StationsController(IConfiguration configuration, ILogger<StationsController> logger, IZoneService zoneService)
-        {
-            _logger = logger;
-            _configuration = configuration;
-            _zoneService = zoneService;
-        }
+        private readonly ILogger _logger = logger;
+        private readonly IConfiguration _configuration = configuration;
+        private readonly IStationService _stationService = stationService;
 
         [HttpGet]
         public IActionResult Get()
         {
-            var zones = _zoneService.Get();
+            var zones = _stationService.Get();
             return new OkObjectResult(zones);
         }
 
-        [HttpGet("id/{zoneId}")]
-        public IActionResult GetByZoneId(string zoneId)
+        [HttpGet("zone/{zoneId}")]
+        public IActionResult GetByZone(string zoneId)
         {
-            var zones = _zoneService.GetByZoneId(zoneId);
+            var zones = _stationService.GetByZone(zoneId);
             return new OkObjectResult(zones);
         }
 
-        [HttpGet("state/{state}")]
-        public IActionResult GetByState(string state)
+        [HttpGet("{stationNumber}/summary")]
+        public IActionResult Getsummary(string stationNumber)
         {
-            var zones = _zoneService.GetByState(state);
-            return new OkObjectResult(zones);
-        }
-
-        [HttpGet("state/{state}/city/{city}")]
-        public IActionResult GetByCity(string state, string city)
-        {
-            var zones = _zoneService.GetByCity(state, city);
-            return new OkObjectResult(zones);
-        }
-
-        [HttpGet("cot/{cot}")]
-        public IActionResult GetByCot(string cot)
-        {
-            var zones = _zoneService.GetByCot(cot);
+            var zones = _stationService.GetSummary(stationNumber);
             return new OkObjectResult(zones);
         }
     }

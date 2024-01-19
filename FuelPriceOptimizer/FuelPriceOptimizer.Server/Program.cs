@@ -8,7 +8,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IFileService, FileService>();
-builder.Services.AddSingleton<IZoneService, StationService>();
+builder.Services.AddSingleton<IStationService, StationService>();
+builder.Services.AddSingleton<IZoneService, ZoneService>();
 builder.Services.AddCors();
 
 var app = builder.Build();

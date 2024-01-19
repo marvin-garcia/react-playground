@@ -2,7 +2,7 @@
 
 namespace FuelPriceOptimizer.Server.Models
 {
-    public class Zone
+    public class Station
     {
         [JsonProperty("stationNumber")]
         public string StationNumber { get; set; }
@@ -23,26 +23,41 @@ namespace FuelPriceOptimizer.Server.Models
         [JsonProperty("zone")]
         public string ZoneId { get; set; }
 
-        public Zone() { }
+        public Station() { }
     }
 
-    public interface IZoneService
+    public class StationSummary
     {
-        public List<Zone> Get();
-
-        public List<Zone> GetByZoneId(string zoneId);
-
-        public List<Zone> GetByState(string state);
-
-        public List<Zone> GetByCity(string state, string city);
-
-        public List<Zone> GetByCot(string cot);
+        [JsonProperty("stationNumber")]
+        public string StationNumber { get; set; }
+        [JsonProperty("date")]
+        public DateTime Date { get; set; }
+        [JsonProperty("volume")]
+        public double Volume { get; set; }
+        [JsonProperty("rolling7DayVolume")]
+        public double Rolling7DayVolume { get; set; }
+        [JsonProperty("weekToWeekChangeVolume")]
+        public double WeekToWeekChangeVolume { get; set; }
+        [JsonProperty("changePercentage")]
+        public double ChangePercentage { get; set; }
+        [JsonProperty("margin")]
+        public double Margin { get; set; }
+        [JsonProperty("rum")]
+        public double Rum { get; set; }
     }
 
-    public class StationService : IZoneService
+    public interface IStationService
     {
-        private readonly List<Zone> _zones;
+        public List<Station> Get();
+        public List<Station> GetByZone(string zoneId);
+        public List<StationSummary> GetSummary(string stationNumber);
+    }
+
+    public class StationService : IStationService
+    {
+        private readonly List<Station> _stations;
         private readonly string _zonesFilePath = @"Data/Zones.json";
+        private readonly string _summaryFIlesPath = @"Data/StationSummary";
 
         public StationService()
         {
@@ -53,36 +68,32 @@ namespace FuelPriceOptimizer.Server.Models
             json = r.ReadToEnd();
 
             // Deserialize JSON to List<Zone>
-            _zones = JsonConvert.DeserializeObject<List<Zone>>(json);
+            _stations = JsonConvert.DeserializeObject<List<Station>>(json);
         }
 
-        public List<Zone> Get()
+        public List<Station> Get()
         {
-            return _zones;
+            return [.. _stations.OrderBy(x => x.ZoneId)];
         }
 
-        public List<Zone> GetByZoneId(string zoneId)
+        public List<Station> GetByZone(string zoneId)
         {
-            var zones = _zones.Where(x => string.Equals(x.ZoneId, zoneId, StringComparison.OrdinalIgnoreCase)).ToList();
+            var zones = _stations.Where(x => string.Equals(x.ZoneId, zoneId, StringComparison.OrdinalIgnoreCase)).ToList();
+            zones = [.. zones.OrderBy(x => x.ZoneId)];
             return zones;
         }
 
-        public List<Zone> GetByState(string state)
+        public List<StationSummary> GetSummary(string stationNumber)
         {
-            var zones = _zones.Where(x => string.Equals(x.State, state, StringComparison.OrdinalIgnoreCase)).ToList();
-            return zones;
-        }
+            string json;
 
-        public List<Zone> GetByCity(string state, string city)
-        {
-            var zones = _zones.Where(x => string.Equals(x.State, state, StringComparison.OrdinalIgnoreCase) && string.Equals(x.City, city, StringComparison.OrdinalIgnoreCase)).ToList();
-            return zones;
-        }
+            // Read JSON data from file
+            using StreamReader r = new(@$"{_summaryFIlesPath}\{stationNumber}.json");
+            json = r.ReadToEnd();
 
-        public List<Zone> GetByCot(string cot)
-        {
-            var zones = _zones.Where(x => string.Equals(x.COT, cot, StringComparison.OrdinalIgnoreCase)).ToList();
-            return zones;
+            var summary = JsonConvert.DeserializeObject<List<StationSummary>>(json);
+            summary = [.. summary.OrderBy(x => x.Date)];
+            return summary;
         }
     }
 }

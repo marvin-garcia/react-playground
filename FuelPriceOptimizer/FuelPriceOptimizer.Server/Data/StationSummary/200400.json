@@ -1,0 +1,182 @@
+[
+  {
+    "volume": 2047,
+    "rolling7DayVolume": 11939,
+    "weekToWeekChangeVolume": 1500,
+    "changePercentage": -5,
+    "margin": 4496,
+    "rum": 1.7932891847,
+    "date": "2023-12-16T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2112,
+    "rolling7DayVolume": 12995,
+    "weekToWeekChangeVolume": 1558,
+    "changePercentage": 5,
+    "margin": 3759,
+    "rum": 1.4821618599,
+    "date": "2023-12-17T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2090,
+    "rolling7DayVolume": 11224,
+    "weekToWeekChangeVolume": 2389,
+    "changePercentage": 7,
+    "margin": 4150,
+    "rum": 1.5840698357,
+    "date": "2023-12-18T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2128,
+    "rolling7DayVolume": 15938,
+    "weekToWeekChangeVolume": 1882,
+    "changePercentage": -1,
+    "margin": 4731,
+    "rum": 1.8130499734,
+    "date": "2023-12-19T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2437,
+    "rolling7DayVolume": 11275,
+    "weekToWeekChangeVolume": 811,
+    "changePercentage": -2,
+    "margin": 5467,
+    "rum": 1.5473766698,
+    "date": "2023-12-20T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2171,
+    "rolling7DayVolume": 13205,
+    "weekToWeekChangeVolume": 845,
+    "changePercentage": -4,
+    "margin": 3597,
+    "rum": 1.7371135147,
+    "date": "2023-12-21T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2428,
+    "rolling7DayVolume": 17440,
+    "weekToWeekChangeVolume": 1158,
+    "changePercentage": 2,
+    "margin": 3738,
+    "rum": 1.7084162729,
+    "date": "2023-12-22T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2058,
+    "rolling7DayVolume": 14414,
+    "weekToWeekChangeVolume": 923,
+    "changePercentage": -3,
+    "margin": 4136,
+    "rum": 1.5459839403,
+    "date": "2023-12-23T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2090,
+    "rolling7DayVolume": 12001,
+    "weekToWeekChangeVolume": 2466,
+    "changePercentage": 7,
+    "margin": 5122,
+    "rum": 1.8563488421,
+    "date": "2023-12-24T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2049,
+    "rolling7DayVolume": 15662,
+    "weekToWeekChangeVolume": 1967,
+    "changePercentage": -7,
+    "margin": 4951,
+    "rum": 1.7198120801,
+    "date": "2023-12-25T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2360,
+    "rolling7DayVolume": 12494,
+    "weekToWeekChangeVolume": 1334,
+    "changePercentage": 3,
+    "margin": 4533,
+    "rum": 1.8030991563,
+    "date": "2023-12-26T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2217,
+    "rolling7DayVolume": 15664,
+    "weekToWeekChangeVolume": 1828,
+    "changePercentage": 0,
+    "margin": 4995,
+    "rum": 1.5405672321,
+    "date": "2023-12-27T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2029,
+    "rolling7DayVolume": 15122,
+    "weekToWeekChangeVolume": 1457,
+    "changePercentage": 0,
+    "margin": 5037,
+    "rum": 1.861413172,
+    "date": "2023-12-28T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2163,
+    "rolling7DayVolume": 11330,
+    "weekToWeekChangeVolume": 1174,
+    "changePercentage": -1,
+    "margin": 4436,
+    "rum": 1.3979800932,
+    "date": "2023-12-29T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2333,
+    "rolling7DayVolume": 12996,
+    "weekToWeekChangeVolume": 1919,
+    "changePercentage": -1,
+    "margin": 3658,
+    "rum": 1.8782633981,
+    "date": "2023-12-30T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2364,
+    "rolling7DayVolume": 17261,
+    "weekToWeekChangeVolume": 1643,
+    "changePercentage": -2,
+    "margin": 3734,
+    "rum": 1.4571412892,
+    "date": "2023-12-31T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2319,
+    "rolling7DayVolume": 16798,
+    "weekToWeekChangeVolume": 2436,
+    "changePercentage": -3,
+    "margin": 3352,
+    "rum": 1.7988252495,
+    "date": "2024-01-01T00:00:00.000",
+    "stationNumber": 200400
+  },
+  {
+    "volume": 2384,
+    "rolling7DayVolume": 15192,
+    "weekToWeekChangeVolume": 1051,
+    "changePercentage": -3,
+    "margin": 4742,
+    "rum": 1.6213409579,
+    "date": "2024-01-02T00:00:00.000",
+    "stationNumber": 200400
+  }
+]
