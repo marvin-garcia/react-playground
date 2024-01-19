@@ -1,107 +1,137 @@
-import React, { useState } from 'react';
+import React from "react";
 
 const Sidebar = () => {
-  const [sidebarState, setSidebarState] = useState('');
-
-  const onSidebarChange = (item) => {
-    console.log('sidebar change:', item);
-    switch (item) {
-      case 'stations':
-        setSidebarState((prevState) => (prevState === 'stations' ? '' : 'stations'));
-        console.log('stations sidebar item state:', sidebarState);
-        break;
-      default:
-        setSidebarState('');
-    }
-  }
-
-  const Stations = (props) => {
-    const itemList = [
-      {
-        name: 'List',
-        href: 'components-alerts.html'
-      }
-    ];
-
-    const collapsed = sidebarState === 'stations' ? false : true;
-
-    return (
-      <li class="nav-item">
-        <a
-          href="#"
-          class={`nav-link ${collapsed ? 'collapsed' : ''}`}
-          data-bs-target="#stations-nav"
-          data-bs-toggle="collapse"
-          aria-expanded={!collapsed}
-          onClick={() => props.onClick('stations')}
-        >
-          <i class="bi bi-menu-button-wide"></i>
-          <span>Stations</span>
-          <i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul 
-          id="stations-nav"
-          class={`nav-content colapse ${collapsed ? 'show' : ''}`}
-          data-bs-parent="#sidebar-nav"
-        >
-          {itemList.map((_item) => {
-            <li key={itemList.indexOf(_item)}>
-              <a key={itemList.indexOf(_item)} href={_item.href}>
-                <i class="bi bi-circle"></i><span>{_item.name}</span>
-              </a>
-            </li>
-          })}
-        </ul>
-      </li>
-    );
-  };
+  const itemList = [
+    {
+      "name": "Stations",
+      "icon": "bi geo-alt-fill",
+      "options": [
+        {
+          "name": "View",
+          "href": "#",
+        },
+      ],
+    },
+    {
+      "name": "Reports",
+      "icon": "bi journal-text",
+      "options": [
+        {
+          "name": "History",
+          "href": "#",
+        },
+        {
+          "name": "Add new",
+          "href": "#",
+        },
+      ],
+    },
+    {
+      "name": "Optimizer",
+      "icon": "bi calculator-fill",
+      "options": [
+        {
+          "name": "History",
+          "image": "assets/img/profile-img.jpg",
+          "href": "#",
+        },
+        {
+          "name": "Train",
+          "image": "assets/img/profile-img.jpg",
+          "href": "#",
+        },
+        {
+          "name": "Predict",
+          "image": "assets/img/profile-img.jpg",
+          "href": "#",
+        },
+      ],
+    },
+  ];
 
   return (
     <aside id="sidebar" class="sidebar">
+
       <ul class="sidebar-nav" id="sidebar-nav">
+
         <li class="nav-item">
           <a class="nav-link " href="index.html">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
         </li>
-        <Stations onClick={onSidebarChange} />
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+        {itemList.map((item) => (
+        <li key={itemList.indexOf(item)} class="nav-item">
+          <a class="nav-link collapsed" data-bs-target={`#${item.name}-nav`} data-bs-toggle="collapse" href="#">
+            <i class={item.icon}></i><span>{item.name}</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="forms-elements.html">
-                <i class="bi bi-circle"></i><span>History</span>
+          <ul id={`${item.name}-nav`} class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            {item.options.map((option) => (
+            <li key={`${itemList.indexOf(item)}${item.options.indexOf(option)}}`}>
+              <a href={option.href}>
+                <i class="bi bi-circle"></i><span>{option.name}</span>
               </a>
             </li>
-            <li>
-              <a href="forms-layouts.html">
-                <i class="bi bi-circle"></i><span>Add new</span>
-              </a>
-            </li>
+            ))}
           </ul>
         </li>
+        ))}
+
+        <li class="nav-heading">Pages</li>
+
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-layout-text-window-reverse"></i><span>Price estimator</span><i class="bi bi-chevron-down ms-auto"></i>
+          <a class="nav-link collapsed" href="users-profile.html">
+            <i class="bi bi-person"></i>
+            <span>Profile</span>
           </a>
-          <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="tables-general.html">
-                <i class="bi bi-circle"></i><span>Estimate</span>
-              </a>
-            </li>
-            <li>
-              <a href="tables-data.html">
-                <i class="bi bi-circle"></i><span>History</span>
-              </a>
-            </li>
-          </ul>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-faq.html">
+            <i class="bi bi-question-circle"></i>
+            <span>F.A.Q</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-contact.html">
+            <i class="bi bi-envelope"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-register.html">
+            <i class="bi bi-card-list"></i>
+            <span>Register</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-login.html">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Login</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-error-404.html">
+            <i class="bi bi-dash-circle"></i>
+            <span>Error 404</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-blank.html">
+            <i class="bi bi-file-earmark"></i>
+            <span>Blank</span>
+          </a>
+        </li>
+
       </ul>
+
     </aside>
   );
 };
+
 export default Sidebar;
