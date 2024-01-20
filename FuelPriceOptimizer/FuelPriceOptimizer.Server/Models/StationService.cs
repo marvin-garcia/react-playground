@@ -11,7 +11,7 @@ namespace FuelPriceOptimizer.Server.Models
         [JsonProperty("stationName")]
         public string StationName { get; set; }
         [JsonProperty("streetAddress")]
-        public string StreetAddres { get; set; }
+        public string StreetAddress { get; set; }
         [JsonProperty("city")]
         public string City { get; set; }
         [JsonProperty("state")]
