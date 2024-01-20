@@ -1,22 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import App from './App';
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
-
-const frame = ReactDOM.createRoot(document.getElementById('frame'));
-frame.render(
+const main = ReactDOM.createRoot(document.getElementById('main'));
+main.render(
   <React.StrictMode>
-    <Header />
-    <Sidebar />
+    <App />
   </React.StrictMode>
 );
 
