@@ -46,18 +46,33 @@ namespace FuelPriceOptimizer.Server.Models
         public double Rum { get; set; }
     }
 
+    public class StationsSummary
+    {
+        public string StationNumber { get; set; }
+        public StationSummary Summary { get; set; }
+
+        public StationsSummary() { }
+
+        public StationsSummary(string sationNumber, StationSummary summary)
+        {
+            this.StationNumber = sationNumber;
+            this.Summary = summary;
+        }
+    }
+
     public interface IStationService
     {
         public List<Station> Get();
         public List<Station> GetByZone(string zoneId);
         public List<StationSummary> GetSummary(string stationNumber);
+        public List<StationsSummary> GetStationsSummary();
     }
 
     public class StationService : IStationService
     {
         private readonly List<Station> _stations;
         private readonly string _zonesFilePath = @"Data/Zones.json";
-        private readonly string _summaryFIlesPath = @"Data/StationSummary";
+        private readonly string _summaryFilesPath = @"Data/StationSummary";
 
         public StationService()
         {
@@ -88,12 +103,26 @@ namespace FuelPriceOptimizer.Server.Models
             string json;
 
             // Read JSON data from file
-            using StreamReader r = new(@$"{_summaryFIlesPath}\{stationNumber}.json");
+            using StreamReader r = new(@$"{_summaryFilesPath}\{stationNumber}.json");
             json = r.ReadToEnd();
 
             var summary = JsonConvert.DeserializeObject<List<StationSummary>>(json);
             summary = [.. summary.OrderBy(x => x.Date)];
             return summary;
+        }
+
+        public List<StationsSummary> GetStationsSummary()
+        {
+            var stationsSummary = new List<StationsSummary>();
+            var stations = Get();
+
+            foreach (var station in stations)
+            {
+                var summary = GetSummary(station.StationNumber);
+                stationsSummary.Add(new StationsSummary(station.StationNumber, summary.Last()));
+            }
+
+            return stationsSummary;
         }
     }
 }

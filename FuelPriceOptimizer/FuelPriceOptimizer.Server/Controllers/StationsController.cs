@@ -33,5 +33,19 @@ namespace FuelPriceOptimizer.Server.Controllers
             var zones = _stationService.GetSummary(stationNumber);
             return new OkObjectResult(zones);
         }
+
+        [HttpGet("{stationNumber}/summary/latest")]
+        public IActionResult GetLatestSummary(string stationNumber)
+        {
+            var zones = _stationService.GetSummary(stationNumber);
+            return new OkObjectResult(zones[-1]);
+        }
+
+        [HttpGet("summary")]
+        public IActionResult GetStationsSummary()
+        {
+            var stationsSummary = _stationService.GetStationsSummary();
+            return new OkObjectResult(stationsSummary);
+        }
     }
 }
