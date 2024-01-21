@@ -1,94 +1,110 @@
 [
   {
-    "stationNumber": "206117",
+    "stationNumber": 206117,
     "opisNumber": "322108",
     "stationName": "Waiakea",
-    "streetAddress": "321 Makaala Street ",
+    "streetAddress": "321 Makaala Street",
     "city": "Hilo",
     "state": "HI",
     "zipCode": 96720,
     "cot": "COCO",
-    "zone": "1"
+    "zone": "1",
+    "latitude": 19.6996592,
+    "longitude": -155.0632237
   },
   {
-    "stationNumber": "91217",
+    "stationNumber": 91217,
     "opisNumber": "197064",
     "stationName": "K & V Enterprises, Inc.",
-    "streetAddress": "192 Kinoole St.",
+    "streetAddress": "192 Kinoole Street",
     "city": "Hilo",
     "state": "HI",
     "zipCode": 96720,
     "cot": "RORO",
-    "zone": "1"
+    "zone": "1",
+    "latitude": 19.725784,
+    "longitude": -155.0897026
   },
   {
-    "stationNumber": "92912",
+    "stationNumber": 92912,
     "opisNumber": "197465",
     "stationName": "Lahaina Petroleum, LLC",
-    "streetAddress": "2188 Kinoole St.",
+    "streetAddress": "2188 Kinoole Street",
     "city": "Hilo",
     "state": "HI",
     "zipCode": 96720,
     "cot": "RORO",
-    "zone": "1"
+    "zone": "1",
+    "latitude": 19.725784,
+    "longitude": -155.0897026
   },
   {
-    "stationNumber": "99723",
+    "stationNumber": 99723,
     "opisNumber": "198381",
     "stationName": "Lahaina Petroleum, LLC",
-    "streetAddress": "774 Kamehameha Hwy.",
+    "streetAddress": "774 Kamehameha Avenue",
     "city": "Hilo",
     "state": "HI",
     "zipCode": 96720,
     "cot": "RORO",
-    "zone": "1"
+    "zone": "1",
+    "latitude": 19.7216023,
+    "longitude": -155.084887
   },
   {
-    "stationNumber": "200400",
+    "stationNumber": 200400,
     "opisNumber": "199799",
     "stationName": "The IB and J Corporation",
-    "streetAddress": "68-1845 Waikoloa Rd",
+    "streetAddress": "68-1845 Waikoloa Road",
     "city": "Waikoloa",
-    "state": "HI ",
+    "state": "HI",
     "zipCode": 96738,
     "cot": "RORO",
-    "zone": "2A"
+    "zone": "2A",
+    "latitude": 19.9285114,
+    "longitude": -155.7870141
   },
   {
-    "stationNumber": "203736",
+    "stationNumber": 203736,
     "opisNumber": "201521",
     "stationName": "Queen K Texaco",
     "streetAddress": "74-5035 Queen Kaahumanu Hwy",
     "city": "Kailua-Kona",
-    "state": "HI ",
+    "state": "HI",
     "zipCode": 96740,
     "cot": "RORO",
-    "zone": "2B"
+    "zone": "2B",
+    "latitude": 19.6734396,
+    "longitude": -156.0158026
   },
   {
-    "stationNumber": "95054",
+    "stationNumber": 95054,
     "opisNumber": "",
     "stationName": "Rawlins Enterprises, Inc.",
-    "streetAddress": "20 Maunaloa Hwy.",
+    "streetAddress": "20 Maunaloa Highway",
     "city": "Kaunakakai",
     "state": "HI",
     "zipCode": 96748,
     "cot": "RORO",
-    "zone": "3"
+    "zone": "3",
+    "latitude": 21.089797,
+    "longitude": -157.0228392
   },
   {
-    "stationNumber": "378733",
+    "stationNumber": 378733,
     "opisNumber": "664811",
     "stationName": "Lahaina Petroleum, LLC",
-    "streetAddress": "4454 Nuhou St. #701",
+    "streetAddress": "4454 Nuhou Street",
     "city": "Lihue",
     "state": "HI",
     "zipCode": 96766,
     "cot": "RORO",
-    "zone": "4A"
+    "zone": "4A",
+    "latitude": 21.9696853,
+    "longitude": -159.3863788
   },
   {
-    "stationNumber": "97442",
+    "stationNumber": 97442,
     "opisNumber": "265679",
     "stationName": "Lahaina Petroleum, LLC",
     "streetAddress": "4411 Rice Street",
@@ -96,21 +112,25 @@
     "state": "HI",
     "zipCode": 96766,
     "cot": "RORO",
-    "zone": "4A"
+    "zone": "4A",
+    "latitude": 21.9746162,
+    "longitude": -159.3680366
   },
   {
-    "stationNumber": "97619",
+    "stationNumber": 97619,
     "opisNumber": "321729",
     "stationName": "Lahaina Petroleum LLC.",
-    "streetAddress": "33187 Kuhio Highway ",
+    "streetAddress": "33187 Kuhio Highway",
     "city": "Lihue",
     "state": "HI",
     "zipCode": 96766,
     "cot": "CORO",
-    "zone": "4A"
+    "zone": "4A",
+    "latitude": 25.5994424,
+    "longitude": -80.4660256
   },
   {
-    "stationNumber": "93871",
+    "stationNumber": 93871,
     "opisNumber": "265615",
     "stationName": "Lahaina Petroleum LLC.",
     "streetAddress": "3486 Poipu Road",
@@ -118,10 +138,12 @@
     "state": "HI",
     "zipCode": 96756,
     "cot": "CORO",
-    "zone": "4B"
+    "zone": "4B",
+    "latitude": 21.8833158,
+    "longitude": -159.4681793
   },
   {
-    "stationNumber": "92866",
+    "stationNumber": 92866,
     "opisNumber": "197454",
     "stationName": "Lahaina Petroleum, LLC",
     "streetAddress": "994 Kuhio Hwy",
@@ -129,32 +151,38 @@
     "state": "HI",
     "zipCode": 96746,
     "cot": "RORO",
-    "zone": "4C"
+    "zone": "4C",
+    "latitude": 22.0659458,
+    "longitude": -159.3190988
   },
   {
-    "stationNumber": "209052",
+    "stationNumber": 209052,
     "opisNumber": "295208",
     "stationName": "MNS Limited",
-    "streetAddress": "2349 S Kihei Rd",
+    "streetAddress": "2349 S Kihei Road",
     "city": "Kihei",
     "state": "HI",
     "zipCode": 96753,
     "cot": "RORO",
-    "zone": "5"
+    "zone": "5",
+    "latitude": 20.7399409,
+    "longitude": -156.4541873
   },
   {
-    "stationNumber": "90903",
+    "stationNumber": 90903,
     "opisNumber": "196979",
     "stationName": "Lahaina Petroleum, LLC",
-    "streetAddress": "1281 Kihei Rd",
+    "streetAddress": "1281 Kihei Road",
     "city": "Kihei",
     "state": "HI",
     "zipCode": 96753,
     "cot": "RORO",
-    "zone": "5"
+    "zone": "5",
+    "latitude": 20.7399409,
+    "longitude": -156.4541873
   },
   {
-    "stationNumber": "373372",
+    "stationNumber": 373372,
     "opisNumber": "543965",
     "stationName": "Lahaina Petroleum, LLC",
     "streetAddress": "3425 Old Haleakala Hwy",
@@ -162,10 +190,12 @@
     "state": "HI",
     "zipCode": 96768,
     "cot": "RORO",
-    "zone": "6"
+    "zone": "6",
+    "latitude": 20.8343051,
+    "longitude": -156.3341337
   },
   {
-    "stationNumber": "91266",
+    "stationNumber": 91266,
     "opisNumber": "197075",
     "stationName": "Lahaina Petroleum, LLC",
     "streetAddress": "109 Kaahumanu Ave",
@@ -173,54 +203,64 @@
     "state": "HI",
     "zipCode": 96732,
     "cot": "RORO",
-    "zone": "7"
+    "zone": "7",
+    "latitude": 20.8893016,
+    "longitude": -156.4728725
   },
   {
-    "stationNumber": "91571",
+    "stationNumber": 91571,
     "opisNumber": "265551",
     "stationName": "Uptown Service, Inc.",
-    "streetAddress": "2085 Main St.",
+    "streetAddress": "2085 Main Street",
     "city": "Wailuku",
     "state": "HI",
     "zipCode": 96793,
     "cot": "COCO",
-    "zone": "7"
+    "zone": "7",
+    "latitude": 20.8869433,
+    "longitude": -156.5048344
   },
   {
-    "stationNumber": "92619",
+    "stationNumber": 92619,
     "opisNumber": "197404",
     "stationName": "Lloyd T. Yamamoto",
-    "streetAddress": "130 W. Kamehameha Ave.",
+    "streetAddress": "130 W. Kamehameha Avenue",
     "city": "Kahului",
     "state": "HI",
     "zipCode": 96732,
     "cot": "RORO",
-    "zone": "7"
+    "zone": "7",
+    "latitude": 20.8879679,
+    "longitude": -156.469441
   },
   {
-    "stationNumber": "210992",
+    "stationNumber": 210992,
     "opisNumber": "605201",
     "stationName": "MNS Limited",
-    "streetAddress": "3511 Lower Honoapiilani Rd",
+    "streetAddress": "3511 Lower Honoapiilani Road",
     "city": "Lahaina",
     "state": "HI",
     "zipCode": 96761,
     "cot": "RORO",
-    "zone": "8"
+    "zone": "8",
+    "latitude": 20.9510082,
+    "longitude": -156.6873416
   },
   {
-    "stationNumber": "92890",
+    "stationNumber": 92890,
     "opisNumber": "197458",
     "stationName": "Lahaina Petroleum LLC.",
-    "streetAddress": "240 Papalaua Street ",
+    "streetAddress": "240 Papalaua Street",
     "city": "Lahaina",
     "state": "HI",
     "zipCode": 96761,
     "cot": "CORO",
-    "zone": "8"
+    "zone": "8",
+    "latitude": 20.8801023,
+    "longitude": -156.6783707
   },
   {
-    "stationNumber": "94871",
+    "stationNumber": 94871,
     "opisNumber": "197769",
     "stationName": "George Williamson Jr.",
     "streetAddress": "7170 Kalanianaole Highway",
@@ -228,54 +268,64 @@
     "state": "HI",
     "zipCode": 96825,
     "cot": "CORO",
-    "zone": "9"
+    "zone": "9",
+    "latitude": 21.2773807,
+    "longitude": -157.7058767
   },
   {
-    "stationNumber": "93186",
+    "stationNumber": 93186,
     "opisNumber": "197521",
     "stationName": "Keolu",
-    "streetAddress": "1070 Keolu Drive ",
+    "streetAddress": "1070 Keolu Drive",
     "city": "Kailua",
     "state": "HI",
     "zipCode": 96734,
     "cot": "COCO",
-    "zone": "10A"
+    "zone": "10A",
+    "latitude": 21.3729466,
+    "longitude": -157.732292
   },
   {
-    "stationNumber": "93508",
+    "stationNumber": 93508,
     "opisNumber": "197569",
     "stationName": "Kailua",
-    "streetAddress": "710 Kailua Road ",
+    "streetAddress": "710 Kailua Road",
     "city": "Kailua",
     "state": "HI",
     "zipCode": 96734,
     "cot": "COCO",
-    "zone": "10A"
+    "zone": "10A",
+    "latitude": 21.3947742,
+    "longitude": -157.7440992
   },
   {
-    "stationNumber": "93568",
+    "stationNumber": 93568,
     "opisNumber": "197581",
-    "stationName": "Aikahi ",
-    "streetAddress": "25 Kaneohe Bay Drive ",
+    "stationName": "Aikahi",
+    "streetAddress": "25 Kaneohe Bay Drive",
     "city": "Kailua",
     "state": "HI",
     "zipCode": 96734,
     "cot": "COCO",
-    "zone": "10A"
+    "zone": "10A",
+    "latitude": 21.4028819,
+    "longitude": -157.799637
   },
   {
-    "stationNumber": "98242",
+    "stationNumber": 98242,
     "opisNumber": "198236",
     "stationName": "Ko'olau",
-    "streetAddress": "45-462 Kaneohe Bay Drive ",
-    "city": "Kaneohe ",
+    "streetAddress": "45-462 Kaneohe Bay Drive",
+    "city": "Kaneohe",
     "state": "HI",
     "zipCode": 96744,
     "cot": "COCO",
-    "zone": "10B"
+    "zone": "10B",
+    "latitude": 21.4028819,
+    "longitude": -157.799637
   },
   {
-    "stationNumber": "99248",
+    "stationNumber": 99248,
     "opisNumber": "265706",
     "stationName": "H.J., Inc.",
     "streetAddress": "59-186 Kamehameha Hwy",
@@ -283,21 +333,25 @@
     "state": "Hi",
     "zipCode": 96712,
     "cot": "RORO",
-    "zone": "11"
+    "zone": "11",
+    "latitude": 21.6710909,
+    "longitude": -158.0429302
   },
   {
-    "stationNumber": "209722",
+    "stationNumber": 209722,
     "opisNumber": "439878",
     "stationName": "Kapolei",
-    "streetAddress": "91-565 Farrington Highway ",
-    "city": "Kapolei ",
+    "streetAddress": "91-565 Farrington Highway",
+    "city": "Kapolei",
     "state": "HI",
     "zipCode": 96707,
     "cot": "COCO",
-    "zone": "12A"
+    "zone": "12A",
+    "latitude": 21.3383637,
+    "longitude": -158.0775369
   },
   {
-    "stationNumber": "380192",
+    "stationNumber": 380192,
     "opisNumber": "684898",
     "stationName": "Kamokila",
     "streetAddress": "484 Kamokila St",
@@ -305,32 +359,38 @@
     "state": "HI",
     "zipCode": 96707,
     "cot": "COCO",
-    "zone": "12A"
+    "zone": "12A",
+    "latitude": 21.3316709,
+    "longitude": -158.0843977
   },
   {
-    "stationNumber": "90371",
+    "stationNumber": 90371,
     "opisNumber": "196834",
     "stationName": "Foss Enterprises Inc.",
-    "streetAddress": "91-909 Fort Weaver Road ",
-    "city": "Ewa Beach ",
+    "streetAddress": "91-909 Fort Weaver Road",
+    "city": "Ewa Beach",
     "state": "HI",
     "zipCode": 96706,
     "cot": "CORO",
-    "zone": "12B"
+    "zone": "12B",
+    "latitude": 21.3166894,
+    "longitude": -158.0134472
   },
   {
-    "stationNumber": "91053",
+    "stationNumber": 91053,
     "opisNumber": "197013",
     "stationName": "Gennesart Group Inc.",
-    "streetAddress": "866 Kamehameha Highway ",
-    "city": "Pearl City ",
+    "streetAddress": "866 Kamehameha Highway",
+    "city": "Pearl City",
     "state": "HI",
     "zipCode": 96782,
     "cot": "CORO",
-    "zone": "13A"
+    "zone": "13A",
+    "latitude": 21.3938087,
+    "longitude": -157.9691834
   },
   {
-    "stationNumber": "93970",
+    "stationNumber": 93970,
     "opisNumber": "197645",
     "stationName": "3G Enterprises LLC.",
     "streetAddress": "98-121 Kamehameha Highway",
@@ -338,32 +398,38 @@
     "state": "HI",
     "zipCode": 96701,
     "cot": "CORO",
-    "zone": "13A"
+    "zone": "13A",
+    "latitude": 21.3827209,
+    "longitude": -157.9452137
   },
   {
-    "stationNumber": "95318",
+    "stationNumber": 95318,
     "opisNumber": "197856",
     "stationName": "C & C Service Station Inc.",
-    "streetAddress": "777 Kamehameha Highway ",
-    "city": "Pearl City ",
+    "streetAddress": "777 Kamehameha Highway",
+    "city": "Pearl City",
     "state": "HI",
     "zipCode": 96782,
     "cot": "CORO",
-    "zone": "13A"
+    "zone": "13A",
+    "latitude": 21.3923488,
+    "longitude": -157.9668247
   },
   {
-    "stationNumber": "208878",
+    "stationNumber": 208878,
     "opisNumber": "288435",
     "stationName": "Stadium",
-    "streetAddress": "4561 Salt Lake Boulevard ",
+    "streetAddress": "4561 Salt Lake Boulevard",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96818,
     "cot": "COCO",
-    "zone": "13B"
+    "zone": "13B",
+    "latitude": 21.3661618,
+    "longitude": -157.9302282
   },
   {
-    "stationNumber": "94204",
+    "stationNumber": 94204,
     "opisNumber": "197677",
     "stationName": "G & H Fujiwara Inc.",
     "streetAddress": "846 Ala Lilikoi Street",
@@ -371,21 +437,25 @@
     "state": "HI",
     "zipCode": 96818,
     "cot": "CORO",
-    "zone": "13B"
+    "zone": "13B",
+    "latitude": 21.3430365,
+    "longitude": -157.9435971
   },
   {
-    "stationNumber": "96285",
+    "stationNumber": 96285,
     "opisNumber": "198103",
     "stationName": "Moanalua",
-    "streetAddress": "986 Valkenburgh Street ",
+    "streetAddress": "986 Valkenburgh Street",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96818,
     "cot": "COCO",
-    "zone": "13B"
+    "zone": "13B",
+    "latitude": 21.3424347,
+    "longitude": -157.9287949
   },
   {
-    "stationNumber": "97303",
+    "stationNumber": 97303,
     "opisNumber": "198133",
     "stationName": "BTK Inc. ",
     "streetAddress": "1055 Ahua Street",
@@ -393,10 +463,12 @@
     "state": "HI",
     "zipCode": 96819,
     "cot": "COCO",
-    "zone": "13B"
+    "zone": "13B",
+    "latitude": 21.3430365,
+    "longitude": -157.9435971
   },
   {
-    "stationNumber": "98823",
+    "stationNumber": 98823,
     "opisNumber": "198301",
     "stationName": "G. Dela Cruz, LLC",
     "streetAddress": "95-130 Kamehameha Hwy",
@@ -404,32 +476,38 @@
     "state": "HI",
     "zipCode": 96789,
     "cot": "RORO",
-    "zone": "13C"
+    "zone": "13C",
+    "latitude": 21.4583204,
+    "longitude": -158.0169404
   },
   {
-    "stationNumber": "91964",
+    "stationNumber": 91964,
     "opisNumber": "197252",
     "stationName": "John S. Abreu Jr.",
-    "streetAddress": "94-380 Mokuola Street ",
-    "city": "Waipahu ",
+    "streetAddress": "94-380 Mokuola Street",
+    "city": "Waipahu",
     "state": "HI",
     "zipCode": 96797,
     "cot": "CORO",
-    "zone": "13D"
+    "zone": "13D",
+    "latitude": 21.3867354,
+    "longitude": -158.0047052
   },
   {
-    "stationNumber": "98584",
+    "stationNumber": 98584,
     "opisNumber": "198275",
     "stationName": "Mother & Son LLC.",
-    "streetAddress": "94-485 Farrington Highway ",
-    "city": "Waipahu ",
+    "streetAddress": "94-485 Farrington Highway",
+    "city": "Waipahu",
     "state": "HI",
     "zipCode": 96797,
     "cot": "CORO",
-    "zone": "13D"
+    "zone": "13D",
+    "latitude": 21.3820685,
+    "longitude": -158.013028
   },
   {
-    "stationNumber": "90411",
+    "stationNumber": 90411,
     "opisNumber": "417418",
     "stationName": "McKinley Motor Service, Inc.",
     "streetAddress": "1139 Kapiolani Blvd",
@@ -437,153 +515,181 @@
     "state": "HI",
     "zipCode": 96814,
     "cot": "RORO",
-    "zone": "14A"
+    "zone": "14A",
+    "latitude": 21.2956556,
+    "longitude": -157.8491076
   },
   {
-    "stationNumber": "90423",
+    "stationNumber": 90423,
     "opisNumber": "196850",
     "stationName": "Beretania",
-    "streetAddress": "1378 S. Beretania Street ",
-    "city": "Honolulu ",
+    "streetAddress": "1378 S. Beretania Street",
+    "city": "Honolulu",
     "state": "HI",
     "zipCode": 96814,
     "cot": "COCO",
-    "zone": "14A"
+    "zone": "14A",
+    "latitude": 21.311958,
+    "longitude": -157.8599367
   },
   {
-    "stationNumber": "99425",
+    "stationNumber": 99425,
     "opisNumber": "198355",
     "stationName": "Mother & Son LLC.",
-    "streetAddress": "1201 S. King Street ",
-    "city": "Honolulu ",
+    "streetAddress": "1201 S. King Street",
+    "city": "Honolulu",
     "state": "HI",
     "zipCode": 96814,
     "cot": "CORO",
-    "zone": "14A"
+    "zone": "14A",
+    "latitude": 21.3430365,
+    "longitude": -157.9435971
   },
   {
-    "stationNumber": "90258",
+    "stationNumber": 90258,
     "opisNumber": "265497",
-    "stationName": "School St. ",
-    "streetAddress": "140 South School Street ",
+    "stationName": "School Street",
+    "streetAddress": "140 South School Street",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96813,
     "cot": "COCO",
-    "zone": "14B"
+    "zone": "14B",
+    "latitude": 21.3453906,
+    "longitude": -157.9461074
   },
   {
-    "stationNumber": "93875",
+    "stationNumber": 93875,
     "opisNumber": "197630",
     "stationName": "Waialae Petroleum Inc.",
-    "streetAddress": "1909 Nuuanu Avenue ",
+    "streetAddress": "1909 Nuuanu Avenue",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96817,
     "cot": "CORO",
-    "zone": "14B"
+    "zone": "14B",
+    "latitude": 21.274511,
+    "longitude": -157.7928459
   },
   {
-    "stationNumber": "93183",
+    "stationNumber": 93183,
     "opisNumber": "197519",
     "stationName": "SC Pak Corporation.",
-    "streetAddress": "1715 N. King Street ",
-    "city": "Honolulu ",
+    "streetAddress": "1715 N. King Street",
+    "city": "Honolulu",
     "state": "HI",
     "zipCode": 96819,
     "cot": "CORO",
-    "zone": "14C"
+    "zone": "14C",
+    "latitude": 21.3098845,
+    "longitude": -157.8581401
   },
   {
-    "stationNumber": "93207",
+    "stationNumber": 93207,
     "opisNumber": "197525",
     "stationName": "JJ Kang Inc.",
-    "streetAddress": "1402 N. School Road ",
-    "city": "Honolulu ",
-    "state": "HI",
-    "zipCode": 96817,
-    "cot": "CORO",
-    "zone": "14C"
-  },
-  {
-    "stationNumber": "95023",
-    "opisNumber": "197804",
-    "stationName": "Waiakamilo Service Inc.",
-    "streetAddress": "909 Waiakamilo Road ",
+    "streetAddress": "1402 N. School Road",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96817,
     "cot": "CORO",
-    "zone": "14C"
+    "zone": "14C",
+    "latitude": 21.3324993,
+    "longitude": -157.8662623
   },
   {
-    "stationNumber": "95592",
+    "stationNumber": 95023,
+    "opisNumber": "197804",
+    "stationName": "Waiakamilo Service Inc.",
+    "streetAddress": "909 Waiakamilo Road",
+    "city": "Honolulu",
+    "state": "HI",
+    "zipCode": 96817,
+    "cot": "CORO",
+    "zone": "14C",
+    "latitude": 21.3236281,
+    "longitude": -157.8760868
+  },
+  {
+    "stationNumber": 95592,
     "opisNumber": "197911",
     "stationName": "YL Pak Corporation.",
     "streetAddress": "2160 N. King Street",
-    "city": "Honolulu ",
+    "city": "Honolulu",
     "state": "HI",
     "zipCode": 96819,
     "cot": "CORO",
-    "zone": "14C"
+    "zone": "14C",
+    "latitude": 21.3430365,
+    "longitude": -157.9435971
   },
   {
-    "stationNumber": "99070",
+    "stationNumber": 99070,
     "opisNumber": "198326",
     "stationName": "Middle Street",
-    "streetAddress": "1305 Middle Street ",
+    "streetAddress": "1305 Middle Street",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96819,
     "cot": "COCO",
-    "zone": "14C"
+    "zone": "14C",
+    "latitude": 21.3404389,
+    "longitude": -157.8801024
   },
   {
-    "stationNumber": "99080",
+    "stationNumber": 99080,
     "opisNumber": "198327",
     "stationName": "Gennesart Group Inc.",
-    "streetAddress": "743 N. King Street ",
-    "city": "Honolulu ",
+    "streetAddress": "743 N. King Street",
+    "city": "Honolulu",
     "state": "HI",
     "zipCode": 96817,
     "cot": "CORO",
-    "zone": "14C"
+    "zone": "14C",
+    "latitude": 21.3098845,
+    "longitude": -157.8581401
   },
   {
-    "stationNumber": "91507",
+    "stationNumber": 91507,
     "opisNumber": "197149",
     "stationName": "Waialae Petroleum Inc.",
-    "streetAddress": " 4117 Waialae Avenue ",
+    "streetAddress": "4117 Waialae Avenue",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96816,
     "cot": "CORO",
-    "zone": "15A"
+    "zone": "15A",
+    "latitude": 21.274511,
+    "longitude": -157.7928459
   },
   {
-    "stationNumber": "91919",
+    "stationNumber": 91919,
     "opisNumber": "197244",
     "stationName": "Kapiolani",
-    "streetAddress": "2969 South King Street ",
+    "streetAddress": "2969 South King Street",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96826,
     "cot": "COCO",
-    "zone": "15A"
+    "zone": "15A",
+    "latitude": 21.3098845,
+    "longitude": -157.8581401
   },
   {
-    "stationNumber": "96247",
+    "stationNumber": 96247,
     "opisNumber": "198008",
     "stationName": "Mother & Son LLC.",
-    "streetAddress": " 3541 Harding Avenue",
+    "streetAddress": "3541 Harding Avenue",
     "city": "Honolulu",
     "state": "HI",
     "zipCode": 96816,
     "cot": "CORO",
-    "zone": "15A"
+    "zone": "15A",
+    "latitude": 21.274511,
+    "longitude": -157.7928459
   },
   {
-    "stationNumber": "98673",
+    "stationNumber": 98673,
     "opisNumber": "198281",
     "stationName": "Ala Wai Service, Inc.",
     "streetAddress": "407 Kapahulu Ave",
@@ -591,32 +697,38 @@
     "state": "HI",
     "zipCode": 96815,
     "cot": "RORO",
-    "zone": "15B"
+    "zone": "15B",
+    "latitude": 21.2715317,
+    "longitude": -157.8227514
   },
   {
-    "stationNumber": "95683",
+    "stationNumber": 95683,
     "opisNumber": "197925",
     "stationName": "Manoa Service Inc.",
-    "streetAddress": "2927 E. Manoa Road ",
-    "city": "Honolulu ",
+    "streetAddress": "2927 E. Manoa Road",
+    "city": "Honolulu",
     "state": "HI",
     "zipCode": 96822,
     "cot": "CORO",
-    "zone": "15C"
+    "zone": "15C",
+    "latitude": 21.315643,
+    "longitude": -157.8039891
   },
   {
-    "stationNumber": "201885",
+    "stationNumber": 201885,
     "opisNumber": "",
     "stationName": "Hana",
-    "streetAddress": "5200 Hana Hwy ",
+    "streetAddress": "5200 Hana Hwy",
     "city": "Kula",
     "state": "HI",
     "zipCode": 96790,
     "cot": "Marketer",
-    "zone": "16"
+    "zone": "16",
+    "latitude": 20.9179067,
+    "longitude": -156.2655629
   },
   {
-    "stationNumber": "97702",
+    "stationNumber": 97702,
     "opisNumber": "",
     "stationName": "Ching",
     "streetAddress": "9212 Kula Hwy",
@@ -624,6 +736,8 @@
     "state": "HI",
     "zipCode": 96713,
     "cot": "Marketer",
-    "zone": "16"
+    "zone": "16",
+    "latitude": 20.7055179,
+    "longitude": -156.3562646
   }
 ]

@@ -22,6 +22,10 @@ namespace FuelPriceOptimizer.Server.Models
         public string COT { get; set; }
         [JsonProperty("zone")]
         public string ZoneId { get; set; }
+        [JsonProperty("latitude")]
+        public double Latitude { get; set; }
+        [JsonProperty("longitude")]
+        public double Longitude { get; set; }
 
         public Station() { }
     }
