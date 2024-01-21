@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { APIProvider, Map, Marker, useMapsLibrary } from "@vis.gl/react-google-maps";
 
-function StationsTable({ backend_url }) {
+function StationsGrid({ stations }) {
+  const gridRef = useRef();
   const cont4ainerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
   const gridStyle = useMemo(() => ({ height: 800, width: '100%' }), []);
-  const paginationPageSizeSelectors = useMemo(() => ([30, 50, 100]), []);
-  const paginationPageSize = useMemo(() => (50), []);
-  const [rowData, setRowData] = useState([]);
-
+  const paginationPageSizeSelectors = useMemo(() => ([20, 30, 50, 100]), []);
+  const paginationPageSize = useMemo(() => (20), []);
   const defaultColDef = useMemo(() => ({
     sortable: true,
     filter: true,
@@ -21,7 +21,6 @@ function StationsTable({ backend_url }) {
     },
     floatingFilter: true,
   }), []);
-
   const columnDefs = useMemo(() => ([
     {
       field: 'zoneId',
@@ -57,32 +56,6 @@ function StationsTable({ backend_url }) {
     }
   ]), []);
 
-  const tableRef = useRef();
-
-  useEffect(() => {
-    const getStationsData = async () => {
-      try {
-        console.log('getting stations data');
-        // let response = await axios.get(`${backend_url}/stations/summary`);
-        // let data = response.data;
-        // setStationsSummary(data);
-
-        const response = await axios.get(`${backend_url}/stations`);
-        const  data = response.data;
-        if (Array.isArray(data)) {
-          console.log('data rows:', data.length);
-          console.log('data sample:', data[0]);
-          setRowData(data);
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    getStationsData();
-
-  }, []);
-
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -91,8 +64,8 @@ function StationsTable({ backend_url }) {
             <h5 className="card-title">Stations</h5>
             <div className="ag-theme-alpine" style={gridStyle}>
               <AgGridReact
-                ref={tableRef}
-                rowData={rowData}
+                ref={gridRef}
+                rowData={stations}
                 columnDefs={columnDefs}
                 defaultColDef={defaultColDef}
                 pagination={true}
@@ -107,10 +80,66 @@ function StationsTable({ backend_url }) {
   );
 }
 
+function StationsMap({ stations }) {
+  const apiKey = "AIzaSyCDuR1hB3peUxx8gbWRRL7YyPTsH8lWwCU";
+  const mapContainerStyle = {
+    height: "400px",
+    width: "100%",
+  };
+  const center = {
+    lat: 21,
+    lng: -157,
+  };
+
+  return (
+    <div className="row">
+      <div className="col-lg-12">
+        <div className="card">
+          <div className="card-body">
+            <APIProvider apiKey={apiKey} libraries={['marker']}>
+              <Map
+                style={mapContainerStyle}
+                center={center}
+                zoom={9}
+              >
+                {stations.map((station) => (
+                  <Marker
+                    key={stations.indexOf(station)}
+                    position={{ lat: station.latitude, lng: station.longitude }}
+                  />
+                ))}
+              </Map>
+            </APIProvider>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const StationsView = ({ backend_url }) => {
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+    const getStationsData = async () => {
+      try {
+        const response = await axios.get(`${backend_url}/stations`);
+        const data = response.data;
+        if (Array.isArray(data)) {
+          setStations(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getStationsData();
+  }, [backend_url]);
+
   return (
     <section className="section">
-      <StationsTable backend_url={backend_url} />
+      <StationsGrid stations={stations} />
+      <StationsMap stations={stations} />
     </section>
   );
 };
