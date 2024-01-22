@@ -10,6 +10,8 @@ namespace FuelPriceOptimizer.Server.Models
         public string Id { get; set; }
         [JsonProperty("fileName")]
         public string Name { get; set; }
+        [JsonProperty("uploadDate")]
+        public DateTime UploadDate { get; set; }
         [JsonProperty("fileUrl")]
         public Uri Url { get; set; }
     }
