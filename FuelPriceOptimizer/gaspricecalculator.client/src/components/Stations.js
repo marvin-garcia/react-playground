@@ -10,7 +10,6 @@ import Chart from "react-google-charts";
 
 function StationsGrid({ stations, onRowSelectionChanged }) {
   const gridRef = useRef();
-  const cont4ainerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
   const gridStyle = useMemo(() => ({ height: 600, width: '100%' }), []);
   const paginationPageSizeSelectors = useMemo(() => ([10, 20, 30, 50, 100]), []);
   const paginationPageSize = useMemo(() => (20), []);
@@ -151,7 +150,7 @@ function StationsPieChart(props) {
   };
 
   const options = {
-    title: 'Stations per Zone Id',
+    title: 'Stations per Zone',
     pieHole: 0.4,
     is3D: false,
   };
@@ -249,9 +248,21 @@ const StationsView = ({ backend_url }) => {
     <section className="section">
       <StationsGrid stations={stations} onRowSelectionChanged={onStationSelectionChanged} />
       <div>
-        <div className="container-fluid">
-          <StationsMap stations={selectedStations} mapId={mapId} mapBounds={mapBounds} />
-          <StationsPieChart data={chartData} />
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="card">
+              <div className="card-body container-fluid">
+                <div className="row">
+                  <div className="col">
+                    <StationsMap stations={selectedStations} mapId={mapId} mapBounds={mapBounds} />
+                  </div>
+                  <div className="col">
+                    <StationsPieChart data={chartData} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
