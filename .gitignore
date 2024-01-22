@@ -399,3 +399,26 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Bootstrap template files
+**/NiceAdmin*
+datatable-app/.gitignore
+datatable-app/package-lock.json
+datatable-app/package.json
+datatable-app/README.md
+datatable-app/public/favicon.ico
+datatable-app/public/index.html
+datatable-app/public/logo192.png
+datatable-app/public/logo512.png
+datatable-app/public/manifest.json
+datatable-app/public/robots.txt
+datatable-app/src/App.css
+datatable-app/src/App.js
+datatable-app/src/App.test.js
+datatable-app/src/index.css
+datatable-app/src/index.js
+datatable-app/src/logo.svg
+datatable-app/src/reportWebVitals.js
+datatable-app/src/setupTests.js
+datatable-app/src/Table.js
+**/.env
