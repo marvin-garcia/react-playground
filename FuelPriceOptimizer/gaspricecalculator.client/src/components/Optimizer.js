@@ -16,7 +16,7 @@ function Grid({ columnDefs, data }) {
   const defaultColDef = {
     resizable: true,
     filterParams: {
-      buttons: ['reset']
+      buttons: ['apply', 'reset']
     }
   };
 
@@ -49,6 +49,8 @@ function Chart({ chartOptions }) {
 function ZonesSummary(props) {
   const title = 'Zones Summary';
   const zones = [...new Set(props.data.map(item => item.zoneId))];
+  
+  // grid options
   const columnDefs = [
     {
       field: 'date',
@@ -75,30 +77,35 @@ function ZonesSummary(props) {
       ],
     })),
   ];
-  const zoneId = '10A';
-  const zoneData = props.data.filter(item => item.zoneId === zoneId);
-  const chartOptions = {
-    title: {
-      text: title,
-    },
-    // autoSize: true,
-    data: zoneData,
-    series: [
-      {
-        xKey: 'date',
-        yKey: 'avgTransferPrice',
-        yName: 'Avg. transfer price',
+
+  // charts options
+  const seriesYkeys = ['avgTransferPrice', 'avgDtwPrice'];
+  const seriesLabels = ['Avg Transfer Price', 'Avg Dtw Price'];
+  const data = Utils.FormatDatesInArray(props.data, "MM/dd/yy");
+  const chartOptions = [];
+  for (let s = 0; s < seriesYkeys.length; s++) {
+    const seriesChartOptions = {
+      title: {
+        text: seriesLabels[s],
       },
-      {
+      autoSize: true,
+      series: [],
+      legend: {
+        enabled: true,
+      },
+    };
+  
+    for (let z = 0; z < zones.length; z++) {
+      seriesChartOptions.series.push({
+        data: data.filter(item => item.zoneId === zones[z]),
         xKey: 'date',
-        yKey: 'avgDtwPrice',
-        yName: 'Avg. DTW price',
-      }
-    ],
-    legend: {
-      enabled: true,
-    },
-  };
+        yKey: seriesYkeys[s],
+        yName: `Zone ${zones[z]}`,
+      });
+    }
+
+    chartOptions.push(seriesChartOptions);
+  }
 
   return (
     <div>
@@ -111,15 +118,18 @@ function ZonesSummary(props) {
             </div>
           </div>
         </div>
-      </div><div className="row">
+      </div>
+      {seriesYkeys.map((item) => (
+        <div className="row">
         <div className="col-lg-12">
           <div className="card">
             <div className="card-body container-fluid d-flex align-items-center">
-              <Chart chartOptions={chartOptions} />
+              <Chart chartOptions={chartOptions[seriesYkeys.indexOf(item)]} />
             </div>
           </div>
         </div>
       </div>
+      ))}
     </div>
   );
 }

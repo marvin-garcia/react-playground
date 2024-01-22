@@ -7,7 +7,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { APIProvider, Map, Marker, useMapsLibrary } from "@vis.gl/react-google-maps";
 import Chart from "react-google-charts";
-import { groupDataByField } from "./Utils";
+import { GroupDataByProperty } from "./Utils";
 
 function StationsGrid({ stations, onRowSelectionChanged }) {
   const gridRef = useRef();
@@ -205,7 +205,7 @@ const StationsView = ({ backend_url }) => {
   }, [backend_url]);
 
   useEffect(() => {
-    let stationCountArray = [['Task', 'Stations per Zone'], ...groupDataByField(stations, 'zoneId')];
+    let stationCountArray = [['Task', 'Stations per Zone'], ...GroupDataByProperty(stations, 'zoneId')];
     setChartData(stationCountArray);
   }, [stations]);
 
