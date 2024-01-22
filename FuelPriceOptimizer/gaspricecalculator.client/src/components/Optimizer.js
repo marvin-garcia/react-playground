@@ -127,6 +127,73 @@ function ZonesSummary(props) {
   );
 }
 
+function PredictView({ backend_url }) {
+  const tuningVariables = [
+    {
+      id: 'volume',
+      name: 'Volume',
+      min: 0,
+      max: 100,
+      default: 50,
+      ref: useRef(),
+    },
+    {
+      id: 'marketShare',
+      name: 'Market Share',
+      min: 0,
+      max: 100,
+      default: 50,
+      ref: useRef(),
+    },
+    {
+      id: 'margin',
+      name: 'Profit margin',
+      min: 0,
+      max: 100,
+      default: 80,
+      ref: useRef(),
+    }
+  ]
+  const [tuningValues, setTuningValues] = useState(tuningVariables.map(item => item.default));
+  const [prediction, setPrediction] = useState(0);
+
+  const handleSubmit = async () => {
+    const tuningValues = tuningVariables.map(item => item.ref.current.value);
+    console.log(tuningValues);
+    setTuningValues(tuningValues);
+  };
+
+  return (
+    <section className="section">
+      <div>
+        <form>
+          {tuningVariables.map((item) => (
+            <div key={tuningValues.indexOf(item)} className="row">
+              <div className="col-lg-12">
+                <div className="card">
+                  <div className="card-body container-fluid d-flex align-items-center">
+                    <label for={item.id} class="form-label m-3">{item.name}</label>
+                    <input ref={item.ref} type="range" class="form-range" id={item.id} min={item.min} max={item.max} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </form>
+        <div className="row">
+          <button
+            type="primary"
+            class="btn btn-primary"
+            onClick={() => handleSubmit(backend_url)}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 function StationsSummary(props) {
   const stations = [...new Set(props.data.map(item => item.stationNumber))];
 
@@ -276,3 +343,4 @@ const SummaryView = ({ backend_url }) => {
 };
 
 export default SummaryView;
+export { PredictView };
