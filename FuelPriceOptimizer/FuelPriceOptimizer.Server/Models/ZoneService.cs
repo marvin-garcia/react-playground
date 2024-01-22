@@ -16,23 +16,9 @@ namespace FuelPriceOptimizer.Server.Models
         public ZoneSummary() { }
     }
 
-    public class ZoneSummaryList
-    {
-        public string ZoneId { get; set; }
-        public List<ZoneSummary> Summaries { get; set; }
-
-        public ZoneSummaryList() { }
-
-        public ZoneSummaryList(string zoneId, List<ZoneSummary> summaries)
-        {
-            this.ZoneId = zoneId;
-            this.Summaries = summaries;
-        }
-    }
-
     public interface IZoneService
     {
-        public List<ZoneSummaryList> GetSummary();
+        public List<ZoneSummary> GetSummary();
         public List<ZoneSummary> GetSummary(string zoneId);
         public List<Station> GetStations(string zoneId);
     }
@@ -47,17 +33,18 @@ namespace FuelPriceOptimizer.Server.Models
             _stationService = stationService;
         }
 
-        public List<ZoneSummaryList> GetSummary()
+        public List<ZoneSummary> GetSummary()
         {
-            var zonesSummaries = new List<ZoneSummaryList>();
+            var summary = new List<ZoneSummary>();
             var summaryFiles = Directory.GetFiles(_zonesFilesPath);
             foreach (var summaryFile in summaryFiles)
             {
                 var zoneId = Path.GetFileNameWithoutExtension(summaryFile);
-                zonesSummaries.Add(new ZoneSummaryList(zoneId, GetSummary(zoneId)));
+                summary.AddRange(GetSummary(zoneId));
             }
 
-            return zonesSummaries;
+            summary = [.. summary.OrderBy(x => x.Date)];
+            return summary;
         }
 
         public List<ZoneSummary> GetSummary(string zoneId)

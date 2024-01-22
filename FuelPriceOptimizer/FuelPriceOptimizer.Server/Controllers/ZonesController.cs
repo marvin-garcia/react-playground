@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FuelPriceOptimizer.Server.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ZonesController(IConfiguration configuration, IZoneService zoneService, ILogger<ZonesController> logger) : Controller
     {
         private readonly ILogger _logger = logger;

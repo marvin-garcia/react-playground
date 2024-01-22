@@ -44,7 +44,7 @@ namespace FuelPriceOptimizer.Server.Controllers
         [HttpGet("summary")]
         public IActionResult GetStationsSummary()
         {
-            var stationsSummary = _stationService.GetStationsSummary();
+            var stationsSummary = _stationService.GetSummary();
             return new OkObjectResult(stationsSummary);
         }
     }

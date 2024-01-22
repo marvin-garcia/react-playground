@@ -50,26 +50,12 @@ namespace FuelPriceOptimizer.Server.Models
         public double Rum { get; set; }
     }
 
-    public class StationsSummary
-    {
-        public string StationNumber { get; set; }
-        public StationSummary Summary { get; set; }
-
-        public StationsSummary() { }
-
-        public StationsSummary(string sationNumber, StationSummary summary)
-        {
-            this.StationNumber = sationNumber;
-            this.Summary = summary;
-        }
-    }
-
     public interface IStationService
     {
         public List<Station> Get();
         public List<Station> GetByZone(string zoneId);
         public List<StationSummary> GetSummary(string stationNumber);
-        public List<StationsSummary> GetStationsSummary();
+        public List<StationSummary> GetSummary();
     }
 
     public class StationService : IStationService
@@ -115,18 +101,18 @@ namespace FuelPriceOptimizer.Server.Models
             return summary;
         }
 
-        public List<StationsSummary> GetStationsSummary()
+        public List<StationSummary> GetSummary()
         {
-            var stationsSummary = new List<StationsSummary>();
+            var summary = new List<StationSummary>();
             var stations = Get();
 
             foreach (var station in stations)
             {
-                var summary = GetSummary(station.StationNumber);
-                stationsSummary.Add(new StationsSummary(station.StationNumber, summary.Last()));
+                summary.AddRange(GetSummary(station.StationNumber));
             }
 
-            return stationsSummary;
+            summary = [.. summary.OrderBy(x => x.Date)];
+            return summary;
         }
     }
 }
