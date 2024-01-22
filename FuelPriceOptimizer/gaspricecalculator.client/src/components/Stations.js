@@ -164,7 +164,7 @@ function StationsPieChart(props) {
       width={chartContainerStyle.width}
     />
   );
-};
+}
 
 const StationsView = ({ backend_url }) => {
   const [stations, setStations] = useState([]);

@@ -21,7 +21,7 @@ const Sidebar = (props) => {
           "href": "#",
         },
         {
-          "name": "Add",
+          "name": "Upload",
           "href": "#",
         },
       ],
