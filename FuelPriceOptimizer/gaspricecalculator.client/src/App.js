@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import StationsView from './components/Stations';
+import ReportsView, { ReportForm } from './components/Reports';
 
 const backend_url = 'http://localhost:5299';
 
@@ -20,8 +21,8 @@ const App = () => {
       case 'Reports.History':
         setMainContent('Reports.History');
         break;
-      case 'Reports.Add':
-        setMainContent('Reports.Add');
+      case 'Reports.Upload':
+        setMainContent('Reports.Upload');
         break;
       case 'Optimizer.History':
         setMainContent('Optimizer.History');
@@ -55,6 +56,8 @@ const App = () => {
       </div>
       <section id="main-section" class="section">
         {mainContent === 'Stations.View' && <StationsView backend_url={backend_url} />}
+        {mainContent === 'Reports.History' && <ReportsView backend_url={backend_url} />}
+        {mainContent === 'Reports.Upload' && <ReportForm backend_url={backend_url} />}
       </section>
     </div>
   );
