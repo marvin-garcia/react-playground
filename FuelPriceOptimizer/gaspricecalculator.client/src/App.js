@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import StationsView from './components/Stations';
 import ReportsView, { ReportForm } from './components/Reports';
-import SummaryView from './components/Optimizer';
+import SummaryView, { PredictView } from './components/Optimizer';
 
 const backend_url = 'http://localhost:5299';
 
@@ -60,6 +60,7 @@ const App = () => {
         {mainContent === 'Reports.History' && <ReportsView backend_url={backend_url} />}
         {mainContent === 'Reports.Upload' && <ReportForm backend_url={backend_url} />}
         {mainContent === 'Optimizer.History' && <SummaryView backend_url={backend_url} />}
+        {mainContent === 'Optimizer.Predict' && <PredictView backend_url={backend_url} />}
       </section>
     </div>
   );
