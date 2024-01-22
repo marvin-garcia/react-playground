@@ -30,7 +30,7 @@ export const GroupDataByProperty = (data, property) => {
 export const FormatDatesInArray = (data, dateFormat) => {
   return data.map((item) => {
     const formattedDate = DateCellRenderer(dateFormat)({ value: item.date });
-    
+
     return { ...item, date: formattedDate };
   });
 };

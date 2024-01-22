@@ -56,6 +56,7 @@ namespace FuelPriceOptimizer.Server.Models
         public List<Station> GetByZone(string zoneId);
         public List<StationSummary> GetSummary(string stationNumber);
         public List<StationSummary> GetSummary();
+        public List<Dictionary<string, object>> GetTimeSeriesSummary();
     }
 
     public class StationService : IStationService
@@ -113,6 +114,36 @@ namespace FuelPriceOptimizer.Server.Models
 
             summary = [.. summary.OrderBy(x => x.Date)];
             return summary;
+        }
+
+        public List<Dictionary<string, object>> GetTimeSeriesSummary()
+        {
+            var summary = GetSummary();
+            var dates = summary.Select(x => x.Date).Distinct();
+            var stations = summary.Select(x => x.StationNumber).Distinct();
+            var gridSummary = new List<Dictionary<string, object>>();
+            foreach (var date in dates)
+            {
+                var datapoint = new Dictionary<string, object>()
+                {
+                    { "date", date }
+                };
+                var filteredData = summary.Where(x => x.Date == date);
+                foreach (var station in stations)
+                {
+                    var zoneData = filteredData.Where(x => x.StationNumber == station).First();
+                    datapoint.Add($"{station}_volume", zoneData.Volume);
+                    datapoint.Add($"{station}_rolling7DayVolume", zoneData.Rolling7DayVolume);
+                    datapoint.Add($"{station}_weekToWeekChangeVolume", zoneData.WeekToWeekChangeVolume);
+                    datapoint.Add($"{station}_changePercentage", zoneData.ChangePercentage);
+                    datapoint.Add($"{station}_margin", zoneData.Margin);
+                    datapoint.Add($"{station}_rum", zoneData.Rum);
+                }
+
+                gridSummary.Add(datapoint);
+            }
+
+            return gridSummary;
         }
     }
 }

@@ -26,6 +26,13 @@ namespace FuelPriceOptimizer.Server.Controllers
             return new OkObjectResult(summaries);
         }
 
+        [HttpGet("summary/timeseries")]
+        public IActionResult GetTmeSeriesSummary()
+        {
+            var timeseries = _zoneService.GetTimeSeriesSummary();
+            return new OkObjectResult(timeseries);
+        }
+
         [HttpGet("{zoneId}/stations")]
         public IActionResult GetStations(string zoneId)
         {

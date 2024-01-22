@@ -47,5 +47,12 @@ namespace FuelPriceOptimizer.Server.Controllers
             var stationsSummary = _stationService.GetSummary();
             return new OkObjectResult(stationsSummary);
         }
+
+        [HttpGet("summary/timeseries")]
+        public IActionResult GetTimeSeriesSummary()
+        {
+            var stationsSummary = _stationService.GetTimeSeriesSummary();
+            return new OkObjectResult(stationsSummary);
+        }
     }
 }

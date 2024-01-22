@@ -21,6 +21,7 @@ namespace FuelPriceOptimizer.Server.Models
         public List<ZoneSummary> GetSummary();
         public List<ZoneSummary> GetSummary(string zoneId);
         public List<Station> GetStations(string zoneId);
+        public List<Dictionary<string, object>> GetTimeSeriesSummary();
     }
 
     public class ZoneService : IZoneService
@@ -58,6 +59,32 @@ namespace FuelPriceOptimizer.Server.Models
             var summary = JsonConvert.DeserializeObject<List<ZoneSummary>>(json);
             summary = [.. summary.OrderBy(x => x.Date)];
             return summary;
+        }
+
+        public List<Dictionary<string, object>> GetTimeSeriesSummary()
+        {
+            var summary = GetSummary();
+            var dates = summary.Select(x => x.Date).Distinct();
+            var zones = summary.Select(x => x.ZoneId).Distinct();
+            var gridSummary = new List<Dictionary<string, object>>();
+            foreach (var date in dates)
+            {
+                var datapoint = new Dictionary<string, object>()
+                {
+                    { "date", date }
+                };
+                var filteredData = summary.Where(x => x.Date == date);
+                foreach (var zone in zones)
+                {
+                    var zoneData = filteredData.Where(x => x.ZoneId == zone).First();
+                    datapoint.Add($"{zone}_avgTransferPrice", zoneData.AvgTransferPrice);
+                    datapoint.Add($"{zone}_avgDtwPrice", zoneData.AvgDtwPrice);
+                }
+
+                gridSummary.Add(datapoint);
+            }
+
+            return gridSummary;
         }
 
         public List<Station> GetStations(string zoneId)
