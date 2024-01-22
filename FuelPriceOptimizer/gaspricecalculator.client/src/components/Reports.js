@@ -3,21 +3,7 @@ import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { format } from "date-fns"
-
-const UrlCellRenderer = (props) => {
-  return (
-    <a href={props.value} target="_blank" rel="noopener noreferrer">
-      Download
-    </a>
-  );
-};
-
-const DateCellRenderer = (props) => {
-  const date = new Date(props.value);
-  const formattedDate = format(date, "MM/dd/yy hh:mm a");
-  return formattedDate;
-};
+import * as Utils from "./Utils";
 
 function ReportsGrid({ reports }) {
   const gridRef = useRef();
@@ -44,16 +30,16 @@ function ReportsGrid({ reports }) {
     {
       field: 'uploadDate',
       filter: 'agDateColumnFilter',
-      cellRenderer: DateCellRenderer,
+      cellRenderer: Utils.DateCellRenderer("MM/dd/yy hh:mm a"),
     },
     {
       field: 'url',
-      cellRenderer: UrlCellRenderer,
+      cellRenderer: Utils.UrlCellRenderer,
     },
   ]), []);
 
   const frameworkComponents = {
-    UrlCellRenderer: UrlCellRenderer,
+    UrlCellRenderer: Utils.UrlCellRenderer,
   };
 
   return (
