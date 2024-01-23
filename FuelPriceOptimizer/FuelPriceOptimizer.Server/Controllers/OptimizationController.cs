@@ -22,8 +22,22 @@ namespace FuelPriceOptimizer.Server.Controllers
         [HttpPost("price")]
         public IActionResult PredictPrice(OptimizationParameters parameters)
         {
-            var price = _optimizationService.OptimizePrice(parameters);
+            var price = _optimizationService.PredictPrice(parameters);
             return new OkObjectResult(price);
+        }
+
+        [HttpGet("history")]
+        public IActionResult GetOptimiGetPredictionHistory()
+        {
+            var history = _optimizationService.GetOptimizationHistory();
+            return new OkObjectResult(history);
+        }
+
+        [HttpGet("training/history")]
+        public IActionResult GetTrainingHistory()
+        {
+            var history = _optimizationService.GetTrainingHistory();
+            return new OkObjectResult(history);
         }
     }
 }

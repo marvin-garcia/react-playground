@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2023-12-17T09:30:00",
+    "volume": 1500,
+    "profitMargin": 0.15,
+    "marketShare": 25,
+    "fuelPrice": 2.8
+  },
+  {
+    "date": "2023-12-20T10:15:00",
+    "volume": 1200,
+    "profitMargin": 0.18,
+    "marketShare": 30,
+    "fuelPrice": 2.5
+  },
+  {
+    "date": "2023-12-25T11:45:00",
+    "volume": 1800,
+    "profitMargin": 0.12,
+    "marketShare": 20,
+    "fuelPrice": 3.0
+  },
+  {
+    "date": "2023-12-28T14:00:00",
+    "volume": 2000,
+    "profitMargin": 0.16,
+    "marketShare": 28,
+    "fuelPrice": 2.7
+  },
+  {
+    "date": "2024-01-02T12:30:00",
+    "volume": 1600,
+    "profitMargin": 0.14,
+    "marketShare": 22,
+    "fuelPrice": 2.9
+  },
+  {
+    "date": "2024-01-01T09:45:00",
+    "volume": 1400,
+    "profitMargin": 0.17,
+    "marketShare": 26,
+    "fuelPrice": 2.6
+  }
+]
