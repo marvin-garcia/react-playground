@@ -10,6 +10,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IFileService, FileService>();
 builder.Services.AddSingleton<IStationService, StationService>();
 builder.Services.AddSingleton<IZoneService, ZoneService>();
+builder.Services.AddSingleton<IOptimizationService, OptimizationService>();
 builder.Services.AddCors();
 
 var app = builder.Build();
@@ -20,7 +21,8 @@ app.UseCors(builder =>
 {
     builder
     .AllowAnyOrigin()
-    .AllowAnyMethod();
+    .AllowAnyMethod()
+    .AllowAnyHeader();
 });
 
 // Configure the HTTP request pipeline.
