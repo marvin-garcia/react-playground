@@ -8,7 +8,7 @@ function OptimizerForm({ backend_url }) {
   const [volume, setVolume] = useState(50);
   const [profitMargin, setProfitMargin] = useState(80);
   const [marketShare, setMarketShare] = useState(50);
-  const [prediction, setPrediction] = useState(10);
+  const [prediction, setPrediction] = useState(0);
 
   const onRangeChange = (value, setterFunction) => {
     setterFunction(value);
@@ -28,12 +28,14 @@ function OptimizerForm({ backend_url }) {
       };
       const response = await axios.post(`${backend_url}/optimization/price`, postData);
       const data = response.data;
-      console.log(data);
-      if (Array.isArray(data)) {
+      if (data) {
         setPrediction(data);
+        console.log('price:', data);
 
         const priceElement = document.getElementById('price');
-        priceElement.innerHTML = data;
+        if (!!priceElement) {
+          priceElement.innerHTML = data;
+        }
       }
     } catch (error) {
       console.log('Could not get prediction:', error.message);
@@ -140,11 +142,11 @@ function OptimizerForm({ backend_url }) {
               <div class="activity">
                 <div class="activity-item">
                   <div class="activity-content d-flex flex-column align-items-center text-center">
-                    {!!prediction && (
+                    {prediction > 0 && (
                       <div>
                         <div>
                           <h1>
-                            <span class="text-success">Optimal Price: </span><span id="price" class="text-success">${prediction}</span>
+                            <span class="text-success">Optimal Price: $</span><span id="price" class="text-success">{prediction}</span>
                           </h1>
                         </div>
                         <div>
@@ -158,7 +160,7 @@ function OptimizerForm({ backend_url }) {
                         </div>
                       </div>
                     )}
-                    {!prediction && (
+                    {prediction === 0 && (
                       <h1>
                         <span class="text-warning">Optimal Price: $0.0</span>
                       </h1>
