@@ -3,7 +3,7 @@ import React from "react";
 const Sidebar = (props) => {
   const itemList = [
     {
-      "name": "Stations",
+      "name": "Locations",
       "icon": "bi geo-alt-fill",
       "options": [
         {
@@ -17,7 +17,11 @@ const Sidebar = (props) => {
       "icon": "bi journal-text",
       "options": [
         {
-          "name": "History",
+          "name": "Summary",
+          "href": "#",
+        },
+        {
+          "name": "File History",
           "href": "#",
         },
         {
@@ -30,11 +34,11 @@ const Sidebar = (props) => {
       "name": "Optimizer",
       "icon": "bi calculator-fill",
       "options": [
-        {
-          "name": "History",
-          "image": "assets/img/profile-img.jpg",
-          "href": "#",
-        },
+        // {
+        //   "name": "History",
+        //   "image": "assets/img/profile-img.jpg",
+        //   "href": "#",
+        // },
         {
           "name": "Train",
           "image": "assets/img/profile-img.jpg",

@@ -2,10 +2,10 @@ import React from 'react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import StationsView from './components/Stations';
-import ReportsView, { ReportForm } from './components/Reports';
-import SummaryView, { PredictView } from './components/Optimizer';
+import ReportFiles, { UploadReportForm, ReportSummary } from './components/Reports';
+import OptimizerView from './components/Optimizer';
 
-const backend_url = 'http://localhost:5299';
+const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const App = () => {
   const [mainContent, setMainContent] = React.useState('Dashboard');
@@ -16,10 +16,13 @@ const App = () => {
     setBreadcrumbTitle(selection.split('.')[0]);
 
     switch (selection) {
-      case 'Stations.View':
+      case 'Locations.View':
         setMainContent('Stations.View');
         break;
-      case 'Reports.History':
+      case 'Reports.Summary':
+        setMainContent('Reports.Summary');
+        break;
+      case 'Reports.FileHistory':
         setMainContent('Reports.History');
         break;
       case 'Reports.Upload':
@@ -57,10 +60,11 @@ const App = () => {
       </div>
       <section id="main-section" class="section">
         {mainContent === 'Stations.View' && <StationsView backend_url={backend_url} />}
-        {mainContent === 'Reports.History' && <ReportsView backend_url={backend_url} />}
-        {mainContent === 'Reports.Upload' && <ReportForm backend_url={backend_url} />}
-        {mainContent === 'Optimizer.History' && <SummaryView backend_url={backend_url} />}
-        {mainContent === 'Optimizer.Predict' && <PredictView backend_url={backend_url} />}
+        {mainContent === 'Reports.Summary' && <ReportSummary backend_url={backend_url} />}
+        {mainContent === 'Reports.History' && <ReportFiles backend_url={backend_url} />}
+        {mainContent === 'Reports.Upload' && <UploadReportForm backend_url={backend_url} />}
+        {mainContent === 'Optimizer.History' && <OptimizerView backend_url={backend_url} />}
+        {mainContent === 'Optimizer.Predict' && <OptimizerView backend_url={backend_url} />}
       </section>
     </div>
   );

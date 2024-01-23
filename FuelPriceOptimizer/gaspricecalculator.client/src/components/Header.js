@@ -4,7 +4,7 @@ import axios from "axios";
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const title = "FuelGasOptimizer";
+  const title = "FuelPriceOptimizer";
 
   const Notifications = (props) => {
     const notifications = [
