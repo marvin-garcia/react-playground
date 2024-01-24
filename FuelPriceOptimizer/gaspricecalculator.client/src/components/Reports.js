@@ -7,6 +7,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import * as Utils from "./Utils";
 
 const ReportsGrid = ({ reports }) => {
+  const [loading, setLoading] = useState(true);
   const gridRef = useRef();
   const rowHeight = 40;
   const gridHeight = Math.min(200 + reports.length * rowHeight, 500);
@@ -42,6 +43,16 @@ const ReportsGrid = ({ reports }) => {
   const frameworkComponents = {
     UrlCellRenderer: Utils.UrlCellRenderer,
   };
+
+  useEffect(() => {
+    if (reports.length > 0) {
+      setLoading(false);
+    }
+  }, [reports]);
+
+  if (loading) {
+    return Utils.LoadingSpinnerCard(gridStyle, { width: "50px", height: "50px" });
+  }
 
   return (
     <div className="row">
@@ -165,7 +176,8 @@ const ReportFiles = ({ backend_url }) => {
   );
 };
 
-const ZonesSummary = (props) => {
+const ZonesGrid = (props) => {
+  const [loading, setLoading] = useState(true);
   const zones = [...new Set(props.data.map(item => item.zoneId))];
 
   // grid options
@@ -202,7 +214,36 @@ const ZonesSummary = (props) => {
     }
   };
 
-  
+  useEffect(() => {
+    if (props.data.length > 0 && props.timeseries.length > 0) {
+      setLoading(false);
+    }
+  }, [props.data, props.timeseries]);
+
+  if (loading) {
+    return Utils.LoadingSpinnerCard(gridStyle, { width: "50px", height: "50px" });
+  }
+  return (
+    <div className="card">
+      <div className="card-body container-fluid d-flex align-items-center mt-3 ml-3 mr-3 mb-3">
+        <div className="ag-theme-alpine" style={gridStyle}>
+          <AgGridReact
+            rowData={props.timeseries}
+            columnDefs={columnDefs}
+            defaultColDef={defaultColDef}
+            pagination={true}
+            paginationPageSizeSelector={paginationPageSizeSelectors}
+            paginationPageSize={paginationPageSize}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const ZonesChart = (props) => {
+  const [loading, setLoading] = useState(true);
+  const zones = [...new Set(props.data.map(item => item.zoneId))];
 
   // charts options
   const chartStyle = useMemo(() => ({ height: 500, width: '100%' }), []);
@@ -233,26 +274,18 @@ const ZonesSummary = (props) => {
     chartOptions.push(seriesChartOptions);
   }
 
+  useEffect(() => {
+    if (props.data.length > 0) {
+      setLoading(false);
+    }
+  }, [props.data]);
+
+  if (loading) {
+    return Utils.LoadingSpinnerCard(chartStyle, { width: "50px", height: "50px" });
+  }
+
   return (
     <div>
-      <div className="row">
-        <div className="col-lg-12">
-          <div className="card">
-            <div className="card-body container-fluid d-flex align-items-center mt-3 ml-3 mr-3 mb-3">
-              <div className="ag-theme-alpine" style={gridStyle}>
-                <AgGridReact
-                  rowData={props.timeseries}
-                  columnDefs={columnDefs}
-                  defaultColDef={defaultColDef}
-                  pagination={true}
-                  paginationPageSizeSelector={paginationPageSizeSelectors}
-                  paginationPageSize={paginationPageSize}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       {seriesYkeys.map((item) => (
         <div className="row">
           <div className="col-lg-12">
@@ -266,6 +299,19 @@ const ZonesSummary = (props) => {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+const ZonesSummary = (props) => {
+  return (
+    <div>
+      <div className="row">
+        <div className="col-lg-12">
+          <ZonesGrid data={props.data} timeseries={props.timeseries} />
+        </div>
+      </div>
+      <ZonesChart data={props.data} />
     </div>
   );
 }
@@ -306,7 +352,7 @@ const StationsSummary = (props) => {
       buttons: ['apply', 'reset']
     }
   };
-  
+
   return (
     <div>
       <div className="row">

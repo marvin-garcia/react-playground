@@ -7,9 +7,10 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { APIProvider, Map, Marker, useMapsLibrary } from "@vis.gl/react-google-maps";
 import Chart from "react-google-charts";
-import { GroupDataByProperty } from "./Utils";
+import * as Utils from "./Utils";
 
 function StationsGrid({ stations, onRowSelectionChanged }) {
+  const [loading, setLoading] = useState(true);
   const gridRef = useRef();
   const gridStyle = useMemo(() => ({ height: 600, width: '100%' }), []);
   const paginationPageSizeSelectors = useMemo(() => ([10, 20, 30, 50, 100]), []);
@@ -59,6 +60,16 @@ function StationsGrid({ stations, onRowSelectionChanged }) {
     },
   ]), []);
 
+  useEffect(() => {
+    if (stations.length > 0) {
+      setLoading(false);
+    }
+  }, [stations]);
+
+  if (loading) {
+    return Utils.LoadingSpinnerCard(gridStyle, {width: "50px", height: "50px"});
+  };
+
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -89,8 +100,10 @@ function StationsGrid({ stations, onRowSelectionChanged }) {
 }
 
 function StationsMap(props) {
+  const [loading, setLoading] = useState(true);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const mapContainerStyle = {
+    minHeight: "200px",
     height: "400px",
     width: "100%",
   };
@@ -99,6 +112,16 @@ function StationsMap(props) {
     lng: 0.0,
   };
   const defaultZoom = 15;
+
+  useEffect(() => {
+    if (props.stations.length > 0 && props.mapBounds) {
+      setLoading(false);
+    }
+  }, [props.stations, props.mapBounds]);
+
+  if (loading) {
+    return Utils.LoadingSpinnerCard(mapContainerStyle, {width: "50px", height: "50px"});
+  }
 
   let useBounds = false;
   if (props.mapBounds) {
@@ -145,6 +168,7 @@ function StationsMap(props) {
 }
 
 function StationsPieChart(props) {
+  const [loading, setLoading] = useState(true);
   const chartContainerStyle = {
     height: "400px",
     width: "100%",
@@ -155,6 +179,16 @@ function StationsPieChart(props) {
     pieHole: 0.4,
     is3D: false,
   };
+
+  useEffect(() => {
+    if (props.data.length > 1) {
+      setLoading(false);
+    }
+  }, [props.data]);
+
+  if (loading) {
+    return Utils.LoadingSpinnerCard(chartContainerStyle, {width: "50px", height: "50px"});
+  }
 
   return (
     <Chart
@@ -205,7 +239,7 @@ const StationsView = ({ backend_url }) => {
   }, [backend_url]);
 
   useEffect(() => {
-    let stationCountArray = [['Task', 'Stations per Zone'], ...GroupDataByProperty(stations, 'zoneId')];
+    let stationCountArray = [['Task', 'Stations per Zone'], ...Utils.GroupDataByProperty(stations, 'zoneId')];
     setChartData(stationCountArray);
   }, [stations]);
 

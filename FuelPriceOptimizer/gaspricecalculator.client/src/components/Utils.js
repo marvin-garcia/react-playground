@@ -34,3 +34,18 @@ export const FormatDatesInArray = (data, dateFormat) => {
     return { ...item, date: formattedDate };
   });
 };
+
+export const LoadingSpinnerCard = (cardStyle, spinnerStyle, text) => {
+  return (
+    <div class="card" style={cardStyle}>
+      <div class="card-body d-flex align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status" style={spinnerStyle}>
+            {/* <span class="visually-hidden">Loading...</span> */}
+          </div>
+          <h5>{text}</h5>
+        </div>
+      </div>
+    </div>
+  );
+};
