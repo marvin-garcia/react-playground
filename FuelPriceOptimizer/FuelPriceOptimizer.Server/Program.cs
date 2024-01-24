@@ -25,6 +25,9 @@ app.UseCors(builder =>
     .AllowAnyHeader();
 });
 
+// Sleep middleware to delay all responses
+app.UseMiddleware<SleepMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
