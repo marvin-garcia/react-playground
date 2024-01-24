@@ -29,8 +29,7 @@ function OptimizerForm({ backend_url }) {
       const response = await axios.post(`${backend_url}/optimization/price`, postData);
       const data = response.data;
       if (data) {
-        setPrediction(data);
-        console.log('price:', data);
+        setPrediction(data.fuelPrice);
 
         const priceElement = document.getElementById('price');
         if (!!priceElement) {
