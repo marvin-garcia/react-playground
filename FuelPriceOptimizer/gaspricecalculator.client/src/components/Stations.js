@@ -5,7 +5,7 @@ import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { APIProvider, Map, Marker, useMapsLibrary } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, Marker, useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import Chart from "react-google-charts";
 import * as Utils from "./Utils";
 
@@ -67,7 +67,7 @@ function StationsGrid({ stations, onRowSelectionChanged }) {
   }, [stations]);
 
   if (loading) {
-    return Utils.LoadingSpinnerCard(gridStyle, {width: "50px", height: "50px"});
+    return Utils.LoadingSpinnerCard(gridStyle, { width: "50px", height: "50px" });
   };
 
   return (
@@ -101,42 +101,76 @@ function StationsGrid({ stations, onRowSelectionChanged }) {
 
 function StationsMap(props) {
   const [loading, setLoading] = useState(true);
+  const [useBounds, setUseBounds] = useState(false);
+  const [mapBounds, setMapBounds] = useState(null);
+  const [mapCenter, setMapCenter] = useState({
+    lat: 0.0,
+    lng: 0.0,
+  });
+  const [mapZoom, setMapZoom] = useState(15);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const mapContainerStyle = {
     minHeight: "200px",
     height: "400px",
     width: "100%",
   };
-  const center = {
-    lat: 0.0,
-    lng: 0.0,
+  const calculateMapBounds = () => {
+    if (props.stations.length > 0) {
+      console.log('station count:', props.stations.length);
+      let west = props.stations[0].longitude;
+      let east = props.stations[0].longitude;
+      let north = props.stations[0].latitude;
+      let south = props.stations[0].latitude;
+
+      for (let i = 1; i < props.stations.length; i++) {
+        const station = props.stations[i];
+        west = Math.min(west, station.longitude);
+        east = Math.max(east, station.longitude);
+        north = Math.max(north, station.latitude);
+        south = Math.min(south, station.latitude);
+      }
+
+      setMapBounds({ west, east, north, south });
+    }
   };
-  const defaultZoom = 15;
 
   useEffect(() => {
-    if (props.stations.length > 0 && props.mapBounds) {
+    if (props.stations.length > 0) {
+      calculateMapBounds();
       setLoading(false);
     }
-  }, [props.stations, props.mapBounds]);
+  }, [props.stations]);
+
+  useEffect(() => {
+    if (!!mapBounds) {
+      console.log('bounds:', mapBounds);
+      if (props.stations.length === 1) {
+        setUseBounds(false);
+        setMapCenter({
+          lat: mapBounds.north,
+          lng: mapBounds.west,
+        });
+        setMapZoom(15);
+      }
+      else {
+        setUseBounds(true);
+        setMapCenter({
+          lat: mapBounds.north - ((mapBounds.north - mapBounds.south) / 2) + 0.0001,
+          lng: mapBounds.east - ((mapBounds.east - mapBounds.west) / 2) + 0.0001,
+        });
+        setMapZoom(10);
+      }
+    }
+  }, [mapBounds]);
+
+  useEffect(() => {
+    console.log('use bounds:', useBounds);
+    console.log('map center:', mapCenter);
+    console.log('map zoom:', mapZoom);
+  }, [mapCenter, mapZoom]);
 
   if (loading) {
-    return Utils.LoadingSpinnerCard(mapContainerStyle, {width: "50px", height: "50px"});
-  }
-
-  let useBounds = false;
-  if (props.mapBounds) {
-    if (
-      props.mapBounds.north === props.mapBounds.south &&
-      props.mapBounds.east === props.mapBounds.west
-    ) {
-      center['lat'] = props.mapBounds.north;
-      center['lng'] = props.mapBounds.west;
-    }
-    else {
-      useBounds = true;
-      center['lat'] = props.mapBounds.north - ((props.mapBounds.north - props.mapBounds.south) / 2);
-      center['lng'] = props.mapBounds.east - ((props.mapBounds.east - props.mapBounds.west) / 2);
-    }
+    return Utils.LoadingSpinnerCard(mapContainerStyle, { width: "50px", height: "50px" });
   }
 
   return (
@@ -148,9 +182,12 @@ function StationsMap(props) {
               <Map
                 key={props.mapId}
                 style={mapContainerStyle}
-                center={useBounds ? undefined : center}
-                zoom={useBounds ? undefined : defaultZoom}
-                initialBounds={useBounds ? props.mapBounds : undefined}
+                // center={useBounds ? undefined : mapCenter}
+                zoom={useBounds ? undefined : mapZoom}
+                initialBounds={useBounds ? mapBounds : undefined}
+                center={mapCenter}
+                // zoom={mapZoom}
+                // initialBounds={mapBounds}
               >
                 {props.stations.map((station) => (
                   <Marker
@@ -187,7 +224,7 @@ function StationsPieChart(props) {
   }, [props.data]);
 
   if (loading) {
-    return Utils.LoadingSpinnerCard(chartContainerStyle, {width: "50px", height: "50px"});
+    return Utils.LoadingSpinnerCard(chartContainerStyle, { width: "50px", height: "50px" });
   }
 
   return (
@@ -205,7 +242,6 @@ const StationsView = ({ backend_url }) => {
   const [stations, setStations] = useState([]);
   const [selectedStations, setSelectedStations] = useState([]);
   const [mapId, setMapId] = useState(1);
-  const [mapBounds, setMapBounds] = useState(null);
   const [chartData, setChartData] = useState([]);
 
   const onStationSelectionChanged = (grid) => {
@@ -243,31 +279,6 @@ const StationsView = ({ backend_url }) => {
     setChartData(stationCountArray);
   }, [stations]);
 
-  useEffect(() => {
-    const calculateMapBounds = () => {
-
-      if (selectedStations.length > 0) {
-        let west = selectedStations[0].longitude;
-        let east = selectedStations[0].longitude;
-        let north = selectedStations[0].latitude;
-        let south = selectedStations[0].latitude;
-
-        for (let i = 1; i < selectedStations.length; i++) {
-          const station = selectedStations[i];
-
-          west = Math.min(west, station.longitude);
-          east = Math.max(east, station.longitude);
-          north = Math.max(north, station.latitude);
-          south = Math.min(south, station.latitude);
-        }
-
-        setMapBounds({ west, east, north, south });
-      }
-    };
-
-    calculateMapBounds();
-  }, [selectedStations]);
-
   return (
     <section className="section">
       <StationsGrid stations={stations} onRowSelectionChanged={onStationSelectionChanged} />
@@ -278,7 +289,7 @@ const StationsView = ({ backend_url }) => {
               <div className="card-body container-fluid">
                 <div className="row">
                   <div className="col">
-                    <StationsMap stations={selectedStations} mapId={mapId} mapBounds={mapBounds} />
+                    <StationsMap stations={selectedStations} mapId={mapId} />
                   </div>
                   <div className="col">
                     <StationsPieChart data={chartData} />
