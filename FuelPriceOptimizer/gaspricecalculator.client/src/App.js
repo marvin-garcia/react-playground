@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import StationsView from './components/Stations';
 import ReportFiles, { UploadReportForm, ReportSummary } from './components/Reports';
-import OptimizerView from './components/Optimizer';
+import OptimizerView, { ModelTrainerView, TrainingHistoryView } from './components/Optimizer';
 
 const backend_url = process.env.REACT_APP_BACKEND_URL;
 
@@ -63,8 +63,9 @@ const App = () => {
         {mainContent === 'Reports.Summary' && <ReportSummary backend_url={backend_url} />}
         {mainContent === 'Reports.History' && <ReportFiles backend_url={backend_url} />}
         {mainContent === 'Reports.Upload' && <UploadReportForm backend_url={backend_url} />}
-        {mainContent === 'Optimizer.History' && <OptimizerView backend_url={backend_url} />}
+        {mainContent === 'Optimizer.History' && <TrainingHistoryView backend_url={backend_url} />}
         {mainContent === 'Optimizer.Predict' && <OptimizerView backend_url={backend_url} />}
+        {mainContent === 'Optimizer.Train' && <ModelTrainerView backend_url={backend_url} />}
       </section>
     </div>
   );

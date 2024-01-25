@@ -34,11 +34,11 @@ const Sidebar = (props) => {
       "name": "Optimizer",
       "icon": "bi calculator-fill",
       "options": [
-        // {
-        //   "name": "History",
-        //   "image": "assets/img/profile-img.jpg",
-        //   "href": "#",
-        // },
+        {
+          "name": "History",
+          "image": "assets/img/profile-img.jpg",
+          "href": "#",
+        },
         {
           "name": "Train",
           "image": "assets/img/profile-img.jpg",
