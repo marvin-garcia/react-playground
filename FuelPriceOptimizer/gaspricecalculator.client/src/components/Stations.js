@@ -5,7 +5,7 @@ import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { APIProvider, Map, Marker, useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
+import { APIProvider, InfoWindow, Map, Marker, useMap } from "@vis.gl/react-google-maps";
 import Chart from "react-google-charts";
 import * as Utils from "./Utils";
 
@@ -99,103 +99,88 @@ function StationsGrid({ stations, onRowSelectionChanged }) {
   );
 }
 
+const MapUpdateComponent = (props) => {
+  const mapId = props.mapId;
+  const mapBounds = props.mapBounds;
+  const map = useMap(mapId);
+
+  useEffect(() => {
+    if (!map) return;
+
+    map.fitBounds({ north: mapBounds.north, south: mapBounds.south, east: mapBounds.east, west: mapBounds.west });
+  }, [map, mapBounds, mapId]);
+
+  return (<></>);
+}
+
 function StationsMap(props) {
+  const stations = props.stations;
   const [loading, setLoading] = useState(true);
-  const [useBounds, setUseBounds] = useState(false);
   const [mapBounds, setMapBounds] = useState(null);
-  const [mapCenter, setMapCenter] = useState({
-    lat: 0.0,
-    lng: 0.0,
-  });
-  const [mapZoom, setMapZoom] = useState(15);
+  const [infoWindowShown, setInfoWindowShown] = useState(false);
+  const [selectedStation, setSelectedStation] = useState(null);
+
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const mapContainerStyle = {
     minHeight: "200px",
     height: "400px",
     width: "100%",
   };
-  const calculateMapBounds = () => {
-    if (props.stations.length > 0) {
-      console.log('station count:', props.stations.length);
-      let west = props.stations[0].longitude;
-      let east = props.stations[0].longitude;
-      let north = props.stations[0].latitude;
-      let south = props.stations[0].latitude;
-
-      for (let i = 1; i < props.stations.length; i++) {
-        const station = props.stations[i];
-        west = Math.min(west, station.longitude);
-        east = Math.max(east, station.longitude);
-        north = Math.max(north, station.latitude);
-        south = Math.min(south, station.latitude);
-      }
-
-      setMapBounds({ west, east, north, south });
-    }
-  };
 
   useEffect(() => {
-    if (props.stations.length > 0) {
-      calculateMapBounds();
+    if (stations.length > 0) {
       setLoading(false);
-    }
-  }, [props.stations]);
 
-  useEffect(() => {
-    if (!!mapBounds) {
-      console.log('bounds:', mapBounds);
-      if (props.stations.length === 1) {
-        setUseBounds(false);
-        setMapCenter({
-          lat: mapBounds.north,
-          lng: mapBounds.west,
-        });
-        setMapZoom(15);
-      }
-      else {
-        setUseBounds(true);
-        setMapCenter({
-          lat: mapBounds.north - ((mapBounds.north - mapBounds.south) / 2) + 0.0001,
-          lng: mapBounds.east - ((mapBounds.east - mapBounds.west) / 2) + 0.0001,
-        });
-        setMapZoom(10);
-      }
+      const { north, south, east, west } = Utils.CalculateMapBounds(stations);
+      setMapBounds({ north, south, east, west });
     }
-  }, [mapBounds]);
-
-  useEffect(() => {
-    console.log('use bounds:', useBounds);
-    console.log('map center:', mapCenter);
-    console.log('map zoom:', mapZoom);
-  }, [mapCenter, mapZoom]);
+  }, [stations]);
 
   if (loading) {
     return Utils.LoadingSpinnerCard(mapContainerStyle, { width: "50px", height: "50px" });
   }
 
+  const toggleInfoWindow = (stationNumber) => {
+    setInfoWindowShown(!infoWindowShown);
+    setSelectedStation(stations.find(station => station.stationNumber === stationNumber));
+  };
+
+  const closeInfoWindow = () => {
+    setInfoWindowShown(false);
+    setSelectedStation(null);
+  };
+
   return (
     <div className="row">
       <div className="col-lg-12">
         <div className="card">
-          <div className="card-body">
+          <div id="map-div" className="card-body">
             <APIProvider apiKey={apiKey} libraries={['marker']}>
               <Map
+                id={props.mapId}
                 key={props.mapId}
                 style={mapContainerStyle}
-                // center={useBounds ? undefined : mapCenter}
-                zoom={useBounds ? undefined : mapZoom}
-                initialBounds={useBounds ? mapBounds : undefined}
-                center={mapCenter}
-                // zoom={mapZoom}
-                // initialBounds={mapBounds}
+                gestureHandling={'greedy'}
               >
-                {props.stations.map((station) => (
+                {stations.map((station) => (
                   <Marker
-                    key={`${props.mapId}-${props.stations.indexOf(station)}`}
+                    key={`${props.mapId}-${stations.indexOf(station)}`}
                     position={{ lat: station.latitude, lng: station.longitude }}
+                    onClick={() => toggleInfoWindow(station.stationNumber)}
+                  // onMouseOver={() => toggleInfoWindow(station.stationNumber)}
                   />
                 ))}
+                {infoWindowShown && selectedStation && (
+                  <InfoWindow
+                    position={{ lat: selectedStation.latitude, lng: selectedStation.longitude }}
+                    onCloseClick={closeInfoWindow}
+                  >
+                    <p>Zone: {selectedStation.zoneId}</p>
+                    <p>Station: {selectedStation.stationNumber}</p>
+                </InfoWindow>
+                )}
               </Map>
+              <MapUpdateComponent mapBounds={mapBounds} mapId={props.mapId} />
             </APIProvider>
           </div>
         </div>

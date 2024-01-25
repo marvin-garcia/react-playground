@@ -49,3 +49,24 @@ export const LoadingSpinnerCard = (cardStyle, spinnerStyle, text) => {
     </div>
   );
 };
+
+export const CalculateMapBounds = (stations) => {
+  if (stations.length === 0) {
+    return { north: 0, south: 0, east: 0, west: 0 }; // Default values when no stations
+  }
+
+  let west = stations[0].longitude;
+  let east = west;
+  let north = stations[0].latitude;
+  let south = north;
+
+  for (let i = 1; i < stations.length; i++) {
+    const station = stations[i];
+    west = Math.min(west, station.longitude);
+    east = Math.max(east, station.longitude);
+    north = Math.max(north, station.latitude);
+    south = Math.min(south, station.latitude);
+  }
+
+  return { north, south, east, west };
+};
