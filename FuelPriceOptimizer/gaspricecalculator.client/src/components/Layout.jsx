@@ -1,13 +1,13 @@
-import React from 'react';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import StationsView from './components/Stations';
-import ReportFiles, { UploadReportForm, ReportSummary } from './components/Reports';
-import OptimizerView, { ModelTrainerView, TrainingHistoryView } from './components/Optimizer';
+import React, { useEffect } from 'react';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import StationsView from './Stations';
+import ReportFiles, { UploadReportForm, ReportSummary } from './Reports';
+import OptimizerView, { ModelTrainerView, TrainingHistoryView } from './Optimizer';
 
 const backend_url = process.env.REACT_APP_BACKEND_URL;
 
-const App = () => {
+const Layout = () => {
   const [mainContent, setMainContent] = React.useState('Dashboard');
   const [breadcrumbTitle, setBreadcrumbTitle] = React.useState('Dashboard');
 
@@ -53,7 +53,7 @@ const App = () => {
         <h1 id="main-frame">{breadcrumbTitle}</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active">{breadcrumbTitle}</li>
           </ol>
         </nav>
@@ -71,4 +71,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Layout;

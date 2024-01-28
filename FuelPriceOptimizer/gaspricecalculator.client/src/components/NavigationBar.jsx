@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useMsal } from '@azure/msal-react';
+import { InteractionStatus } from '@azure/msal-browser';
+import { b2cPolicies } from '../authConfig';
 
-const Header = () => {
+const title = "FuelPriceOptimizer";
+
+export const NavigationBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const title = "FuelPriceOptimizer";
-
+  const { instance, inProgress } = useMsal();
+  const activeAccount = instance.getActiveAccount();
+  
   const Notifications = (props) => {
     const notifications = [
       {
@@ -37,7 +42,7 @@ const Header = () => {
     return (
       <div>
         <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link nav-icon" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
           </a>
@@ -89,7 +94,7 @@ const Header = () => {
 
     return (
       <li class="nav-item dropdown">
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <a class="nav-link nav-icon" data-bs-toggle="dropdown">
           <i class="bi bi-chat-left-text"></i>
           <span class="badge bg-success badge-number">3</span>
         </a>
@@ -120,22 +125,29 @@ const Header = () => {
 
   const Profile = (props) => {
     const profileData = {
-      "firstName": "John",
-      "name": "John Smith",
-      "role": "CEO & Founder",
-      "image": "assets/img/profile-img.jpg",
+      name: activeAccount.idTokenClaims.name,
+      firstName: activeAccount.idTokenClaims.given_name,
+    };
+
+    const handleLogoutRedirect = () => {
+      instance.logoutRedirect();
+    };
+
+    const handleProfileEdit = () => {
+      if (inProgress === InteractionStatus.None) {
+        instance.acquireTokenRedirect(b2cPolicies.authorities.editProfile);
+      }
     };
 
     return (
       <li class="nav-item dropdown pe-3">
-        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src={profileData.image} alt="Profile" class="rounded-circle" />
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" href="#">
           <span class="d-none d-md-block dropdown-toggle ps-2">{profileData.firstName}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
             <h6>{profileData.name}</h6>
-            <span>{profileData.role}</span>
+            {profileData.role && <span>{profileData.role}</span>}
           </li>
           <li>
             <hr class="dropdown-divider" />
@@ -168,7 +180,7 @@ const Header = () => {
             <hr class="dropdown-divider" />
           </li>
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="#">
+            <a class="dropdown-item d-flex align-items-center" onClick={handleLogoutRedirect} href="#">
               <i class="bi bi-box-arrow-right"></i>
               <span>Sign Out</span>
             </a>
@@ -192,7 +204,7 @@ const Header = () => {
     <div>
       <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="/" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="" />
             <span class="d-none d-lg-block">{title}</span>
           </a>
@@ -220,5 +232,3 @@ const Header = () => {
     </div>
   )
 };
-
-export default Header;

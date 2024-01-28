@@ -4,7 +4,7 @@ import { AgGridReact } from "ag-grid-react";
 import { AgChartsReact } from "ag-charts-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import * as Utils from "./Utils";
+import * as Utils from "../components/Utils";
 
 const ReportsGrid = ({ reports }) => {
   const [loading, setLoading] = useState(true);
@@ -287,7 +287,7 @@ const ZonesChart = (props) => {
   return (
     <div>
       {seriesYkeys.map((item) => (
-        <div className="row">
+        <div key={seriesYkeys.indexOf(item)} className="row">
           <div className="col-lg-12">
             <div className="card">
               <div className="card-body container-fluid d-flex align-items-center">
@@ -459,7 +459,7 @@ const ReportSummary = ({ backend_url }) => {
             ref={zonesTabRef}
             class="nav-link active"
             aria-current="page"
-            href="#"
+            href="/reports/summary"
             onClick={() => handleTabClick(zonesTabRef.current)}
           >Zones
           </a>
@@ -469,7 +469,7 @@ const ReportSummary = ({ backend_url }) => {
             ref={stationsTabRef}
             class="nav-link"
             aria-current="page"
-            href="#"
+            href="/reports/summary"
             onClick={() => handleTabClick(stationsTabRef.current)}
           >Stations
           </a>
@@ -481,6 +481,6 @@ const ReportSummary = ({ backend_url }) => {
   );
 };
 
-export default ReportFiles;
+export default ReportSummary;
+export { ReportFiles };
 export { UploadReportForm };
-export { ReportSummary };

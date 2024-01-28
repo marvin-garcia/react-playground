@@ -70,3 +70,13 @@ export const CalculateMapBounds = (stations) => {
 
   return { north, south, east, west };
 };
+
+export const capitalizeWord = (word) => {
+  // Make sure the wording is not empty
+  if (word.length === 0) {
+    return word;
+  }
+
+  // Change the first letter to uppercase and concatenate the rest of the wording
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}

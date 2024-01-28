@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef, useMemo, useContext } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import * as Utils from "./Utils";
+import * as Utils from "../components/Utils";
 
 function PredictFuelPrice({ backend_url }) {
   const [volume, setVolume] = useState(50);
@@ -21,11 +21,6 @@ function PredictFuelPrice({ backend_url }) {
         volume,
         profitMargin,
         marketShare,
-      };
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
       };
       const response = await axios.post(`${backend_url}/optimization/price`, postData);
       const data = response.data;

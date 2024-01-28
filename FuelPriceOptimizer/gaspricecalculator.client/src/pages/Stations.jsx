@@ -1,13 +1,13 @@
 // https://cloud.google.com/blog/products/maps-platform/introducing-react-components-for-the-maps-javascript-api
 
-import React, { useEffect, useState, useRef, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { APIProvider, InfoWindow, Map, Marker, useMap } from "@vis.gl/react-google-maps";
 import Chart from "react-google-charts";
-import * as Utils from "./Utils";
+import * as Utils from "../components/Utils";
 
 function StationsGrid({ stations, onRowSelectionChanged }) {
   const [loading, setLoading] = useState(true);
@@ -75,10 +75,6 @@ function StationsGrid({ stations, onRowSelectionChanged }) {
       <div className="col-lg-12">
         <div className="card">
           <div className="card-body d-flex align-items-center">
-            <h5 className="card-title mb-0">Stations</h5>
-            {/* <button type="reset" className="btn btn-secondary ml-auto">
-              Reset
-            </button> */}
           </div>
           <div className="ag-theme-alpine" style={gridStyle}>
             <AgGridReact
