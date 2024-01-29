@@ -12,7 +12,7 @@ export const PageLayout = (props) => {
   const location = useLocation();
   
   useEffect(() => {
-    setBreadcrumbTitle(Utils.capitalizeWord(location.pathname.split('/')[1]));
+    setBreadcrumbTitle(Utils.CapitalizeWord(location.pathname.split('/')[1]));
   }, [location.pathname]);
 
   return (
