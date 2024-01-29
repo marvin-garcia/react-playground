@@ -6,8 +6,9 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import * as Utils from "../components/Utils";
 
 const UsersGrid = ({ backend_url }) => {
+  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  const [gridApi, setGridApi] = useState(null);
+  // const [gridApi, setGridApi] = useState(null);
   const gridRef = useRef();
   const gridStyle = useMemo(() => ({ height: 400, width: "100%" }), []);
   const paginationPageSizeSelectors = useMemo(() => ([10, 30, 50, 100]), []);
@@ -127,17 +128,28 @@ const UsersGrid = ({ backend_url }) => {
     }
   };
 
+  useEffect(() => {
+    if (users.length > 0) {
+      setLoading(false);
+    }
+  }, [users]);
+
+  if (loading) {
+    return Utils.LoadingSpinnerCard(gridStyle, { width: "50px", height: "50px" });
+  };
+
   return (
     <div>
       <div className="ag-theme-alpine" style={gridStyle}>
         <AgGridReact
+        ref={gridRef}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           pagination={true}
           paginationPageSizeSelector={paginationPageSizeSelectors}
           paginationPageSize={paginationPageSize}
           rowData={users}
-          onGridReady={(params) => setGridApi(params.api)}
+          // onGridReady={(params) => setGridApi(params.api)}
         />
       </div>
       <button onClick={handleAddUser}>Add New User</button>
