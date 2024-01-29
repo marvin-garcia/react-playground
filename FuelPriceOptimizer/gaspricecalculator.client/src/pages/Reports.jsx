@@ -59,7 +59,7 @@ const ReportsGrid = ({ reports }) => {
       <div className="col-lg-12">
         <div className="card">
           <div className="card-body d-flex align-items-center">
-            <h5 className="card-title mb-0">Reports</h5>
+            <h5 className="card-title mb-0">File History</h5>
           </div>
           <div className="ag-theme-alpine" style={gridStyle}>
             <AgGridReact
@@ -113,7 +113,7 @@ const UploadReportForm = ({ backend_url }) => {
   };
 
   return (
-    <section class="section">
+    <>
       <div class="row">
         <div class="col-lg-5">
           <div class="card">
@@ -146,7 +146,7 @@ const UploadReportForm = ({ backend_url }) => {
           </div>
         </div>
       </div>
-    </section >
+    </ >
   )
 }
 
@@ -170,9 +170,9 @@ const ReportFiles = ({ backend_url }) => {
   }, [backend_url]);
 
   return (
-    <section className="section">
+    <>
       <ReportsGrid reports={reports} />
-    </section>
+    </>
   );
 };
 
@@ -399,6 +399,7 @@ const ReportSummary = ({ backend_url }) => {
         console.log('Could not get zones summary data:', error.message);
       }
     };
+
     const getZonesGridData = async () => {
       try {
         const response = await axios.get(`${backend_url}/Zones/summary/timeseries`);
@@ -410,6 +411,7 @@ const ReportSummary = ({ backend_url }) => {
         console.log('Could not get zones time series data:', error.message);
       }
     };
+
     const getStationsChartData = async () => {
       try {
         const response = await axios.get(`${backend_url}/stations/summary`);
@@ -421,6 +423,7 @@ const ReportSummary = ({ backend_url }) => {
         console.log('Could not get stations summary data:', error.message);
       }
     };
+
     const getStationsGridData = async () => {
       try {
         const response = await axios.get(`${backend_url}/stations/summary/timeseries`);
@@ -432,6 +435,7 @@ const ReportSummary = ({ backend_url }) => {
         console.log('Could not get stations time series data:', error.message);
       }
     };
+    
     getZonesChartData();
     getZonesGridData();
     getStationsChartData();
@@ -452,7 +456,7 @@ const ReportSummary = ({ backend_url }) => {
   };
 
   return (
-    <section className="section">
+    <>
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a
@@ -477,7 +481,7 @@ const ReportSummary = ({ backend_url }) => {
       </ul>
       {type === 'zones' && <ZonesSummary data={zonesSummary} timeseries={zonesTimeSeries} />}
       {type === 'stations' && <StationsSummary data={stationsSummary} timeseries={stationsTimeSeries} />}
-    </section>
+    </>
   );
 };
 

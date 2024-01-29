@@ -261,7 +261,7 @@ const StationsView = ({ backend_url }) => {
   }, [stations]);
 
   return (
-    <section className="section">
+    <>
       <StationsGrid stations={stations} onRowSelectionChanged={onStationSelectionChanged} />
       <div>
         <div className="row">
@@ -281,7 +281,7 @@ const StationsView = ({ backend_url }) => {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

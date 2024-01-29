@@ -40,7 +40,7 @@ export const NavigationBar = () => {
     ];
 
     return (
-      <div>
+      <>
         <li class="nav-item dropdown">
           <a class="nav-link nav-icon" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
@@ -66,7 +66,7 @@ export const NavigationBar = () => {
             ))}
           </ul>
         </li>
-      </div>
+      </>
     );
   }
 

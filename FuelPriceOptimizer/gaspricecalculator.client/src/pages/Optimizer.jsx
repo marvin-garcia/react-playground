@@ -42,7 +42,7 @@ function PredictFuelPrice({ backend_url }) {
   };
 
   return (
-    <section className="section">
+    <>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Fuel price optimizer</h5>
@@ -184,7 +184,7 @@ function PredictFuelPrice({ backend_url }) {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 }
 
@@ -281,22 +281,22 @@ const TrainingHistoryView = ({ backend_url }) => {
   }, [backend_url]);
 
   return (
-    <section className="section">
+    <>
       <TrainingHistoryGrid trainingHistory={trainingHistory} />
-    </section>
+    </>
   );
 }
 
 const ModelTrainerView = ({ backend_url }) => {
   return (
-    <section className="section">
+    <>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Model optimization (Coming soon...)</h5>
           Train your forecasting models to provide the most accurate fuel prices based on the latest report data.
         </div>
       </div>
-    </section>
+    </>
   )
 }
 
