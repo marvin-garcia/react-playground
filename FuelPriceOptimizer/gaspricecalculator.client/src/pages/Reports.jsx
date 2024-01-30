@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
+import { Routes, Route } from 'react-router-dom';
 import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
 import { AgChartsReact } from "ag-charts-react";
@@ -379,7 +380,7 @@ const StationsSummary = (props) => {
 }
 
 const ReportSummary = ({ backend_url }) => {
-  const [type, setType] = useState('zones');
+  const [selectedTab, setSelectedTab] = useState("zones");
   const [zonesSummary, setZonesSummary] = useState([]);
   const [zonesTimeSeries, setZonesTimeSeries] = useState([]);
   const [stationsSummary, setStationsSummary] = useState([]);
@@ -388,102 +389,74 @@ const ReportSummary = ({ backend_url }) => {
   const stationsTabRef = useRef();
 
   useEffect(() => {
-    const getZonesChartData = async () => {
+    const fetchData = async (url, setData) => {
       try {
-        const response = await axios.get(`${backend_url}/zones/summary`);
+        const response = await axios.get(url);
         const data = response.data;
         if (Array.isArray(data)) {
-          setZonesSummary(data);
+          setData(data);
         }
       } catch (error) {
-        console.log('Could not get zones summary data:', error.message);
+        console.log(`Could not get data from ${url}:`, error.message);
       }
     };
 
-    const getZonesGridData = async () => {
-      try {
-        const response = await axios.get(`${backend_url}/Zones/summary/timeseries`);
-        const data = response.data;
-        if (Array.isArray(data)) {
-          setZonesTimeSeries(data);
-        }
-      } catch (error) {
-        console.log('Could not get zones time series data:', error.message);
-      }
-    };
-
-    const getStationsChartData = async () => {
-      try {
-        const response = await axios.get(`${backend_url}/stations/summary`);
-        const data = response.data;
-        if (Array.isArray(data)) {
-          setStationsSummary(data);
-        }
-      } catch (error) {
-        console.log('Could not get stations summary data:', error.message);
-      }
-    };
-
-    const getStationsGridData = async () => {
-      try {
-        const response = await axios.get(`${backend_url}/stations/summary/timeseries`);
-        const data = response.data;
-        if (Array.isArray(data)) {
-          setStationsTimeSeries(data);
-        }
-      } catch (error) {
-        console.log('Could not get stations time series data:', error.message);
-      }
-    };
-    
-    getZonesChartData();
-    getZonesGridData();
-    getStationsChartData();
-    getStationsGridData();
+    fetchData(`${backend_url}/zones/summary`, setZonesSummary);
+    fetchData(`${backend_url}/zones/summary/timeseries`, setZonesTimeSeries);
+    fetchData(`${backend_url}/stations/summary`, setStationsSummary);
+    fetchData(`${backend_url}/stations/summary/timeseries`, setStationsTimeSeries);
   }, [backend_url]);
 
-  const handleTabClick = (tab) => {
-    if (tab === zonesTabRef.current) {
-      setType('zones');
-      tab.classList.add('active');
-      stationsTabRef.current.classList.remove('active');
-    }
-    else if (tab === stationsTabRef.current) {
-      setType('stations');
-      tab.classList.add('active');
-      zonesTabRef.current.classList.remove('active');
+  const handleTabClick = (tab, tabType) => {
+    setSelectedTab(tabType);
+    tab.current.classList.add("active");
+    if (tabType === "zones") {
+      stationsTabRef.current.classList.remove("active");
+    } else {
+      zonesTabRef.current.classList.remove("active");
     }
   };
 
   return (
     <>
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
+      <ul className="nav nav-tabs">
+        <li className="nav-item">
           <a
             ref={zonesTabRef}
-            class="nav-link active"
-            aria-current="page"
-            href="/reports/summary"
-            onClick={() => handleTabClick(zonesTabRef.current)}
-          >Zones
+            className={`nav-link ${selectedTab === "zones" ? "active" : ""}`}
+            href="#"
+            onClick={() => handleTabClick(zonesTabRef, "zones")}
+          >
+            Zones
           </a>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <a
             ref={stationsTabRef}
-            class="nav-link"
-            aria-current="page"
-            href="/reports/summary"
-            onClick={() => handleTabClick(stationsTabRef.current)}
-          >Stations
+            className={`nav-link ${selectedTab === "stations" ? "active" : ""}`}
+            href="#"
+            onClick={() => handleTabClick(stationsTabRef, "stations")}
+          >
+            Stations
           </a>
         </li>
       </ul>
-      {type === 'zones' && <ZonesSummary data={zonesSummary} timeseries={zonesTimeSeries} />}
-      {type === 'stations' && <StationsSummary data={stationsSummary} timeseries={stationsTimeSeries} />}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            selectedTab === "zones" ? (
+              <ZonesSummary data={zonesSummary} timeseries={zonesTimeSeries} />
+            ) : (
+              <StationsSummary data={stationsSummary} timeseries={stationsTimeSeries} />
+            )
+          }
+        />
+      </Routes>
     </>
   );
 };
+
 
 export default ReportSummary;
 export { ReportFiles };
