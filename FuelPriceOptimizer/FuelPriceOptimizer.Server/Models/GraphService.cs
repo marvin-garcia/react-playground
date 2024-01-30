@@ -14,14 +14,14 @@ namespace FuelPriceOptimizer.Server.Models
                 [JsonProperty("issuerAssignedId")]
                 public string IssuerAssignedId { get; set; }
                 [JsonProperty("signInType")]
-                public string SingInType { get; set; }
+                public string SignInType { get; set; }
 
                 public Identity() { }
 
                 public Identity(Microsoft.Graph.Models.ObjectIdentity identity)
                 {
                     this.IssuerAssignedId = identity.IssuerAssignedId;
-                    this.SingInType = identity.SignInType;
+                    this.SignInType = identity.SignInType;
                 }
             }
 
@@ -192,7 +192,7 @@ namespace FuelPriceOptimizer.Server.Models
                 {
                     return new ObjectIdentity
                     {
-                        SignInType = x.SingInType,
+                        SignInType = x.SignInType,
                         IssuerAssignedId = x.IssuerAssignedId,
                         Issuer = _configuration["AzureAdB2C:Domain"],
                     };
