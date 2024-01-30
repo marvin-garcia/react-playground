@@ -45,5 +45,12 @@ namespace FuelPriceOptimizer.Server.Controllers
             var newUser = await _graphService.CreateUser(user);
             return new OkObjectResult(newUser);
         }
+
+        [HttpDelete("users/{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var deletedUser = await _graphService.DeleteUser(userId);
+            return new OkObjectResult(deletedUser);
+        }
     }
 }
