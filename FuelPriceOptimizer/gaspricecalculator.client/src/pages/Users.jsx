@@ -8,9 +8,8 @@ import * as Utils from "../components/Utils";
 const UsersGrid = ({ backend_url }) => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  // const [gridApi, setGridApi] = useState(null);
   const gridRef = useRef();
-  const gridStyle = useMemo(() => ({ height: 400, width: "100%" }), []);
+  const [gridStyle, setGridStyle] = useState({ height: "500px", width: "100%" });
   const paginationPageSizeSelectors = useMemo(() => ([10, 30, 50, 100]), []);
   const paginationPageSize = useMemo(() => (50), []);
   const defaultColDef = useMemo(() => ({
@@ -33,7 +32,7 @@ const UsersGrid = ({ backend_url }) => {
         <a href="#" onClick={() => handleResetPassword(props.data.id)}>
           <i title="Reset password" class="bi bi-key-fill" style={{ marginRight: "10px" }}></i>
         </a>
-        <a href="#" onClick={handleDeleteUser(props.data.id)}>
+        <a href="#" onClick={() => handleDeleteUser(props.data.id)}>
           <i title="Delete user" class="bi bi-trash-fill" style={{ marginRight: "10px" }}></i>
         </a>
       </div>
@@ -49,7 +48,6 @@ const UsersGrid = ({ backend_url }) => {
       headerName: 'Email',
       field: 'identities',
       valueGetter: (params) => {
-        console.log(params.data.identities);
         const emailIdentity = params.data.identities.find((identity) => identity.signInType === 'emailAddress' || identity.signInType === 'userName');
         return emailIdentity ? emailIdentity.issuerAssignedId : 'Not found';
       },
@@ -59,9 +57,9 @@ const UsersGrid = ({ backend_url }) => {
       field: 'accountEnabled',
       floatingFilter: false,
     },
-    { 
+    {
       headerName: 'Is Admin',
-      field: 'isAdmin', 
+      field: 'isAdmin',
       floatingFilter: false,
     },
     {
@@ -85,12 +83,22 @@ const UsersGrid = ({ backend_url }) => {
       let data = response.data;
       data = data.filter(user => !user.identities.some(identity => identity.signInType === 'federated')
       );
-  
+
       setUsers(data);
     } catch (error) {
       console.error('Error fetching users:', error);
     }
   };
+
+  useEffect(() => {
+    const resizeGrid = () => {
+      const rowHeight = 40;
+      const gridHeight = Math.min(200 + users.length * rowHeight, 800);
+      setGridStyle({ height: gridHeight, width: '100%' });
+    };
+
+    resizeGrid();
+  }, [users]);
 
   const handleEditUser = (user) => {
     // Implement edit logic
@@ -102,30 +110,71 @@ const UsersGrid = ({ backend_url }) => {
     console.log('Reset password for user:', user);
   };
 
-  const handleDeleteUser = (user) => {
-    // Implement delete logic
-    console.log('Delete user:', user);
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await axios.delete(`${backend_url}/graph/users/${userId}`);
+      if (response.status === 200) {
+        await fetchUsers();
+      }
+      else {
+        console.error(`Failed to delete user: Status: ${response.status}. Reason: ${response.statusText}`);
+      }
+    }
+    catch (error) {
+      console.error('Error deleting user:', error);
+    }
+
+    setLoading(false);
+    alert("User deleted successfully!");
   };
 
-  const handleAddUser = async () => {
+  const handleAddUser = async (event) => {
+    const elements = event.target.elements;
+
+    const displayName = elements[0].value;
+    const email = elements[1].value;
+    const isAdmin = elements[2].checked;
+    const accountEnabled = elements[3].checked;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert(`${email} is not a valid email address.`);
+      return;
+    }
+
+    setLoading(true);
     try {
-      const response = await fetch(`${backend_url}/graph/users`, {
-        method: 'POST',
+      const postData = {
+        displayName: displayName,
+        identities: [
+          {
+            signInType: "emailAddress",
+            issuerAssignedId: email,
+          },
+        ],
+        accountEnabled: accountEnabled,
+        isAdmin: isAdmin,
+      };
+
+      const response = await axios.post(`${backend_url}/graph/users`, postData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(/* new user data */),
       });
 
-      if (response.ok) {
-        const newUser = await response.json();
+      if (response.status === 200) {
+        const newUser = response.data;
         setUsers([...users, newUser]);
       } else {
-        console.error('Failed to add user:', response.statusText);
+        console.error(`Failed to add user: Status: ${response.status}. Reason: ${response.statusText}`);
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Error adding user:', error);
     }
+
+    setLoading(false);
+    alert("User created successfully!");
   };
 
   useEffect(() => {
@@ -139,20 +188,75 @@ const UsersGrid = ({ backend_url }) => {
   };
 
   return (
-    <div>
-      <div className="ag-theme-alpine" style={gridStyle}>
-        <AgGridReact
-        ref={gridRef}
-          columnDefs={columnDefs}
-          defaultColDef={defaultColDef}
-          pagination={true}
-          paginationPageSizeSelector={paginationPageSizeSelectors}
-          paginationPageSize={paginationPageSize}
-          rowData={users}
-          // onGridReady={(params) => setGridApi(params.api)}
-        />
+    <>
+      <div>
+        <div className="ag-theme-alpine" style={gridStyle}>
+          <AgGridReact
+            ref={gridRef}
+            key={users.length}
+            columnDefs={columnDefs}
+            defaultColDef={defaultColDef}
+            pagination={true}
+            paginationPageSizeSelector={paginationPageSizeSelectors}
+            paginationPageSize={paginationPageSize}
+            rowData={users}
+          // domLayout="autoHeight"
+          />
+        </div>
       </div>
-      <button onClick={handleAddUser}>Add New User</button>
+      <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop" style={{ marginTop: "30px" }}>
+          Add user
+        </button>
+      </div>
+      <NewUserModal onSubmit={handleAddUser} />
+    </>
+  );
+};
+
+const NewUserModal = (props) => {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    props.onSubmit(event);
+  };
+
+  return (
+    <div class="modal fade" id="disablebackdrop" tabIndex="-1" data-bs-backdrop="false">
+      <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Add user</h5>
+              <form class="row g-4" onSubmit={handleSubmit}>
+                <div class="col-md-10">
+                  <input type="text" class="form-control" placeholder="Full Name" required />
+                </div>
+                <div class="col-md-10">
+                  <input type="email" class="form-control" placeholder="Email" required />
+                </div>
+                <div class="col-md-10">
+                  <input type="checkbox" class="form-check-input" placeholder="isAdmin" />
+                  <label class="form-check-label" for="isAdmin" style={{ marginLeft: "10px" }}>
+                    Administrator
+                  </label>
+                </div>
+                <div class="col-md-10">
+                  <input type="checkbox" class="form-check-input" placeholder="accountEnabled" defaultChecked />
+                  <label class="form-check-label" for="accountEnabled" style={{ marginLeft: "10px" }}>
+                    Enabled
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary" style={{ marginRight: "10px" }}>Submit</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
