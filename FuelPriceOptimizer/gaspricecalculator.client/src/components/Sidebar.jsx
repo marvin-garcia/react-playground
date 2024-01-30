@@ -20,7 +20,7 @@ const Sidebar = (props) => {
               {item.options.map((option) => (
                 <li key={`${props.sidebarOptions.indexOf(item)}${item.options.indexOf(option)}}`}>
                   <Link to={option.link}>
-                    <i class="bi bi-circle"></i><span>{option.name}</span>
+                    <i class={option.icon}></i><span>{option.name}</span>
                   </Link>
                 </li>
               ))}

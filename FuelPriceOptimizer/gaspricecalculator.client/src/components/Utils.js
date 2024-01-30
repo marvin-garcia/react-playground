@@ -71,7 +71,7 @@ export const CalculateMapBounds = (stations) => {
   return { north, south, east, west };
 };
 
-export const capitalizeWord = (word) => {
+export const CapitalizeWord = (word) => {
   // Make sure the wording is not empty
   if (word.length === 0) {
     return word;

@@ -87,6 +87,7 @@ namespace FuelPriceOptimizer.Server.Models
         public Task<List<AADB2C.Group>> GetGroups();
         public Task<AADB2C.Group> GetGroup(string gorupId);
         public Task<AADB2C.User> CreateUser(AADB2C.User user);
+        public Task<bool> DeleteUser(string userId);
     }
 
     public class GraphService : IGraphService
@@ -212,6 +213,19 @@ namespace FuelPriceOptimizer.Server.Models
             }
 
             return user;
+        }
+
+        public async Task<bool> DeleteUser(string userId)
+        {
+            try
+            {
+                await _graphClient.Users[userId].DeleteAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

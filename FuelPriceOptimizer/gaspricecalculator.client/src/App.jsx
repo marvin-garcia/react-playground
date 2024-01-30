@@ -15,55 +15,76 @@ import { NotFound } from './pages/NotFound';
 import StationsView from './pages/Stations';
 import ReportSummary, { ReportFiles, UploadReportForm } from './pages/Reports';
 import OptimizerView, { TrainingHistoryView, ModelTrainerView } from './pages/Optimizer';
+import UsersGrid from './pages/Users';
 
 const backend_url = process.env.REACT_APP_BACKEND_URL;
+// previous sub menu icon was "bi bi-circle"
 const sidebarOptions = [
   {
     "name": "Stations",
-    "icon": "bi geo-alt-fill",
+    "icon": "bi bi-geo-alt-fill",
     "options": [
       {
         "name": "View",
         "link": "/stations/view",
+        "icon": "bi bi-eye",
       },
     ],
   },
   {
     "name": "Reports",
-    "icon": "bi journal-text",
+    "icon": "bi bi-journal-text",
     "options": [
       {
         "name": "Summary",
         "link": "/reports/summary",
+        "icon": "bi bi-table"
       },
       {
         "name": "File History",
         "link": "/reports/files",
+        "icon": "bi bi-folder-check"
       },
       {
         "name": "Upload",
         "link": "/reports/upload",
+        "icon": "bi bi-cloud-upload"
       },
     ],
   },
   {
     "name": "Optimizer",
-    "icon": "bi calculator-fill",
+    "icon": "bi bi-calculator-fill",
     "options": [
       {
         "name": "History",
         "image": "assets/img/profile-img.jpg",
         "link": "/optimizer/history",
+        "icon": "bi bi-clock-history"
       },
       {
         "name": "Train",
         "image": "assets/img/profile-img.jpg",
         "link": "/optimizer/train",
+        "icon": "bi bi-code-slash"
       },
       {
         "name": "Predict",
         "image": "assets/img/profile-img.jpg",
         "link": "/optimizer/predict",
+        "icon": "bi bi-graph-up"
+      },
+    ],
+  },
+  {
+    "name": "Users",
+    "icon": "bi bi-person-fill",
+    "options": [
+      {
+        "name": "View",
+        "image": "assets/img/person-square.jpg",
+        "link": "/users/view",
+        "icon": "bi bi-eye",
       },
     ],
   },
@@ -178,6 +199,10 @@ const Pages = () => {
         <Route path="history" element={<TrainingHistoryView backend_url={backend_url} />} />
         <Route path="train" element={<ModelTrainerView backend_url={backend_url} />} />
         <Route path="predict" element={<OptimizerView backend_url={backend_url} />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+      <Route path="users">
+        <Route path="view" element={<UsersGrid backend_url={backend_url} />} />
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="*" element={<NotFound />} />
